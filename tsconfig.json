@@ -24,13 +24,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@hooks/*": ["./src/hooks/*"],
+      "@components/*": ["src/theme1/components/*"],
+      "@pages/*": ["src/theme1/pages/*"],
+      "@hooks/*": ["src/theme1/hooks/*"],
       "@utils/*": ["./src/utils/*"],
       "@types/*": ["./src/types/*"],
       "@assets/*": ["./src/assets/*"],
-      "@contexts/*": ["./src/contexts/*"],
+      "@contexts/*": ["src/theme1/contexts/*"],
       "@services/*": ["./src/services/*"]
     }
   },

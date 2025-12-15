@@ -1,0 +1,16 @@
+.competition-detail-content {
+  display: flex;
+  flex-direction: column;
+  background: #161719;
+  border-radius: 4px;
+  overflow: hidden;
+  color: #fff;
+  overflow-y: scroll;
+  padding-right: 2px;
+  transition: flex 0.3s ease;
+}
+
+// Header Section
+.competition-header {
+  background: #1a1b1d;
+}

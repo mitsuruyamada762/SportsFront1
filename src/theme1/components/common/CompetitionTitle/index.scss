@@ -1,0 +1,157 @@
+.competition-title {
+  width: 100%;
+  border-radius: 4px;
+  background: #2e2f30;
+  height: 36px;
+
+  .header-top {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+  }
+
+
+  .league-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    .favourite {
+      font-size: 18px;
+    }
+
+    .league-badge {
+      position: relative;
+      background: #3b82f6;
+      border-radius: 4px;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      .star-icon {
+        width: 12px;
+        height: 12px;
+      }
+
+      .dots {
+        color: #fff;
+        font-size: 12px;
+        line-height: 1;
+        margin-left: 2px;
+      }
+    }
+
+    .league-name {
+      font-size: 13px;
+      color: #fff;
+      font-weight: 500;
+    }
+  }
+
+  .layout-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .layout-label {
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+
+      input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+
+        &:checked+.toggle-slider {
+          background-color: #c1c1c1;
+
+          &:before {
+            transform: translateX(20px);
+            background-color: #ed8b00;
+          }
+        }
+      }
+
+      .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #4d4e4f;
+        transition: 0.3s;
+        border-radius: 24px;
+
+        &:before {
+          position: absolute;
+          content: '';
+          height: 18px;
+          width: 18px;
+          left: 3px;
+          bottom: 3px;
+          background-color: #b8b8b9;
+          transition: 0.3s;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    .view-toggle {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.7);
+      
+      .view-icon-btn:first-child {
+        transform: rotateY(180deg);
+        color: rgba(255, 255, 255, 0.7);
+      }
+      
+      .view-icon-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        width: 27px;
+        height: 27px;
+        flex-shrink: 0;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+    
+    .view-icon-btn {
+      color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      width: 27px;
+      height: 27px;
+      flex-shrink: 0;
+      
+      &.grid-reset-btn {
+        color: rgba(255, 255, 255, 0.7);
+        transform: rotateY(180deg);
+      }
+    }
+  }
+}

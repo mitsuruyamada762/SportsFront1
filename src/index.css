@@ -12,19 +12,17 @@
   --bg-overlay: rgba(0, 0, 0, 0.5);
   --bg-overlay-dark: rgba(0, 0, 0, 0.7);
   --bg-overlay-darker: rgba(0, 0, 0, 0.9);
-  
+
   /* Gradient backgrounds */
-  --background: radial-gradient(
-      49.19% 87.45% at 50% 100%,
+  --background: radial-gradient(49.19% 87.45% at 50% 100%,
       rgba(0, 182, 185, 0.5) 0%,
-      rgba(0, 182, 185, 0) 100%
-    ),
+      rgba(0, 182, 185, 0) 100%),
     #0a1324;
   --bg-gradient-light: linear-gradient(0deg, #008f930d 0% 100%), #0d385914;
   --bg-gradient-light-hover: linear-gradient(0deg, #095a5d0d 0% 100%), #09263c14;
   --bg-gradient-white: linear-gradient(0deg, #0d38590f 0% 100%), #fff;
   --bg-gradient-primary: linear-gradient(0deg, #0d38591a 0% 100%), #008f93;
-  
+
   /* ===== Primary/Brand Colors ===== */
   --color-primary: #00b6b9;
   --color-primary-dark: #008f93;
@@ -33,7 +31,7 @@
   --color-primary-bg: rgba(0, 143, 147, 0.12);
   --color-primary-bg-hover: #6df6ff33;
   --color-primary-bg-active: #6df6ff66;
-  
+
   /* ===== Text Colors ===== */
   --text-primary: #ffffff;
   --text-secondary: #99aab5;
@@ -42,30 +40,25 @@
   --text-darker: #0b1727;
   --text-light: #383838;
   --text-muted: #3d3d3d;
-  
+
   /* ===== Accent Colors ===== */
   --color-accent: #6df6ff;
   --color-success: #3dc872;
   --color-danger: #f60059;
   --color-warning: #ffd700;
-  
+
   /* ===== Border Colors ===== */
   --border-light: #e5e7eb;
   --border-medium: #d1d5db;
   --border-dark: rgba(255, 255, 255, 0.1);
   --border-darker: rgba(255, 255, 255, 0.05);
-  
-  /* ===== Scrollbar Colors ===== */
-  --scrollbar-track: rgba(0, 0, 0, 0.5);
-  --scrollbar-thumb: linear-gradient(180deg, #818181 0%, #acacac 100%);
-  --scrollbar-thumb-thin: linear-gradient(180deg, #00b6b9 0%, #008f93 100%);
-  --scrollbar-thumb-hover: linear-gradient(180deg, #00e0ff 0%, #00b6b9 100%);
-  
+
+
   /* ===== Shadow Colors ===== */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
-  
+
   /* ===== Component Specific Colors ===== */
   --odds-bg: rgba(10, 19, 36, 0.6);
   --odds-bg-hover: #0b1727;
@@ -85,32 +78,33 @@
   --bg-overlay: rgba(255, 255, 255, 0.5);
   --bg-overlay-dark: rgba(255, 255, 255, 0.7);
   --bg-overlay-darker: rgba(255, 255, 255, 0.9);
-  
+
   --text-primary: #ffffff;
   --text-secondary: #666666;
   --text-tertiary: #99aab5;
   --text-dark: #0b1727;
   --text-darker: #000000;
-  
+
   --border-light: #e5e7eb;
   --border-medium: #d1d5db;
   --border-dark: rgba(0, 0, 0, 0.1);
   --border-darker: rgba(0, 0, 0, 0.05);
-  
+
   --odds-bg: #ffffff;
   --odds-bg-hover: rgba(0, 0, 0, 0.1);
   --odds-value: rgb(0, 143, 147);
   --unavailable-bg: rgba(0, 0, 0, 0.05);
 }
+
 @font-face {
   font-family: "Impact";
-  src: url("./assets/impact.ttf") format("truetype");
+  src: url("./assets/fonts/impact.ttf") format("truetype");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Oxanium";
-  src: url("./assets/Oxanium-Regular.ttf") format("truetype");
+  src: url("./assets/fonts/Oxanium-Regular.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -135,36 +129,6 @@
     right: auto;
   }
 
-  /* Custom scrollbar styles for dark theme */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--scrollbar-track);
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-thumb);
-    border-radius: 4px;
-    border: 1px solid var(--border-dark);
-    min-height: 40px;
-    height: 40px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--scrollbar-thumb);
-  }
-
-  ::-webkit-scrollbar-thumb:active {
-    background: var(--scrollbar-thumb);
-  }
-
-  ::-webkit-scrollbar-corner {
-    background: var(--scrollbar-track);
-  }
 
   body {
     @apply text-white;
@@ -180,9 +144,6 @@
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
-    /* Firefox scrollbar styles */
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-primary) var(--border-darker);
   }
 
   * {
@@ -192,9 +153,6 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    /* Firefox scrollbar styles */
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-primary) var(--border-darker);
   }
 
   /* Allow text selection for input fields and text areas */
@@ -255,40 +213,5 @@
 
   .card-footer {
     @apply flex items-center p-6 pt-0;
-  }
-
-  /* Custom scrollbar utility classes */
-  .scrollbar-thin {
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-primary) var(--border-darker);
-  }
-
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  .scrollbar-thin::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 3px;
-  }
-
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-thumb-thin);
-    border-radius: 3px;
-    border: 1px solid var(--border-darker);
-  }
-
-  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: var(--scrollbar-thumb-hover);
-  }
-
-  .scrollbar-hidden {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hidden::-webkit-scrollbar {
-    display: none;
   }
 }

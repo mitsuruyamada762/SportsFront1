@@ -1,0 +1,1118 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'BetConstruct-Icons';
+    src: url('../assets/fonts/BetConstruct-Icons.0NPWbmTE.woff') format('woff'),
+        url('../assets/fonts/BetConstruct-Icons.BIPi8zlY.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^='bc-i-'],
+[class*=' bc-i-'] {
+    font-family: 'BetConstruct-Icons' !important;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.bc {
+    font-size: 18px;
+}
+
+.bc-i-Upcoming:before {
+    content: ""
+}
+
+.bc-i-time:before {
+    content: "";
+}
+
+.bc-i-search:before {
+    content: "";
+}
+
+.bc-i-info:before {
+    content: ""
+}
+
+.bc-i-Info:before {
+    content: ""
+}
+
+.bc-i-view-list:before {
+    content: "";
+}
+
+.bc-i-link:before {
+    content: "";
+}
+
+.bc-i-cashed-out:before {
+    content: "";
+}
+
+.bc-i-block-to-right:before {
+    content: "";
+}
+
+.bc-i-small-arrow-down:before {
+    content: "";
+}
+
+.bc-i-small-arrow-right:before {
+    content: "";
+}
+
+.bc-i-favorite:before {
+    content: "";
+}
+
+.bc-i-tournament:before {
+    content: ""
+}
+
+.bc-i-boost:before {
+    content: ""
+}
+
+.bc-i-FlashGames:before {
+    content: ""
+}
+
+.bc-i-default-icon:before {
+    content: ""
+}
+
+.bc-i-DefaultIcon:before {
+    content: ""
+}
+
+.bc-i-Go:before {
+    content: ""
+}
+
+.bc-i-Sepaktakraw:before {
+    content: ""
+}
+
+.bc-i-SepakTakraw:before {
+    content: ""
+}
+
+.bc-i-AgeofEmpires:before {
+    content: ""
+}
+
+.bc-i-AgeOfEmpires:before {
+    content: ""
+}
+
+.bc-i-FreeFire:before {
+    content: ""
+}
+
+.bc-i-FeeFire:before {
+    content: ""
+}
+
+.bc-i-ArenaofValor:before {
+    content: ""
+}
+
+.bc-i-4000235:before {
+    content: ""
+}
+
+.bc-i-ArenaOfValor:before {
+    content: ""
+}
+
+.bc-i-Headis:before {
+    content: ""
+}
+
+.bc-i-Teqball:before {
+    content: ""
+}
+
+.bc-i-MobileLegends:before {
+    content: ""
+}
+
+.bc-i-ApexLegends:before {
+    content: ""
+}
+
+.bc-i-Valorant:before {
+    content: ""
+}
+
+.bc-i-VirtualMarbleRacing:before {
+    content: ""
+}
+
+.bc-i-Kabaddi:before {
+    content: ""
+}
+
+.bc-i-RainbowSix:before {
+    content: ""
+}
+
+.bc-i-Petanque:before {
+    content: ""
+}
+
+.bc-i-ClashRoyale:before {
+    content: ""
+}
+
+.bc-i-420033728:before {
+    content: ""
+}
+
+.bc-i-Bodybuilding-icon:before {
+    content: ""
+}
+
+.bc-i-BodyBuilding:before {
+    content: ""
+}
+
+.bc-i-FIFA:before {
+    content: ""
+}
+
+.bc-i-circuit:before {
+    content: ""
+}
+
+.bc-i-Circuit:before {
+    content: ""
+}
+
+.bc-i-PS4GAMING:before {
+    content: ""
+}
+
+.bc-i-PS4Gaming:before {
+    content: ""
+}
+
+.bc-i-E-IceHockey:before {
+    content: ""
+}
+
+.bc-i-150025:before {
+    content: ""
+}
+
+.bc-i-eSports_logo_sportbook:before {
+    content: ""
+}
+
+.bc-i-eSportsLogoSportbook:before {
+    content: ""
+}
+
+.bc-i-KingOfGlory:before {
+    content: ""
+}
+
+.bc-i-PUBG:before {
+    content: ""
+}
+
+.bc-i-PubG:before {
+    content: ""
+}
+
+.bc-i-RocketLeague:before {
+    content: ""
+}
+
+.bc-i-WarcraftIII:before {
+    content: ""
+}
+
+.bc-i-WarCraftIII:before {
+    content: ""
+}
+
+.bc-i-StreetFighterSymbol:before {
+    content: ""
+}
+
+.bc-i-Esports:before {
+    content: ""
+}
+
+.bc-i-eSports:before {
+    content: ""
+}
+
+.bc-i-CrossFire:before {
+    content: ""
+}
+
+.bc-i-Halo:before {
+    content: ""
+}
+
+.bc-i-HON:before {
+    content: ""
+}
+
+.bc-i-Hon:before {
+    content: ""
+}
+
+.bc-i-Vainglory:before {
+    content: ""
+}
+
+.bc-i-VirtualCarRacing:before {
+    content: ""
+}
+
+.bc-i-420031330:before {
+    content: ""
+}
+
+.bc-i-CallOfDuty:before {
+    content: ""
+}
+
+.bc-i-CounterStrike:before {
+    content: "!"
+}
+
+.bc-i-LeagueofLegendsWildRift:before {
+    content: ""
+}
+
+.bc-i-LeagueOfLegends:before {
+    content: '"'
+}
+
+.bc-i-halo:before {
+    content: "#"
+}
+
+.bc-i-HaloF:before {
+    content: "#"
+}
+
+.bc-i-Dota2:before {
+    content: "$"
+}
+
+.bc-i-BrawlStars:before {
+    content: ""
+}
+
+.bc-i-HeroesOfTheStorm:before {
+    content: "%"
+}
+
+.bc-i-Hearthstone:before {
+    content: "&"
+}
+
+.bc-i-MortalKombatXL:before {
+    content: "'"
+}
+
+.bc-i-WorldOfTanks:before {
+    content: "("
+}
+
+.bc-i-WorldOfWarcraft:before {
+    content: ")"
+}
+
+.bc-i-Overwatch:before {
+    content: "*"
+}
+
+.bc-i-Smite:before {
+    content: "+"
+}
+
+.bc-i-smash:before {
+    content: ","
+}
+
+.bc-i-Smash:before {
+    content: ","
+}
+
+.bc-i-StarCraft:before {
+    content: "-"
+}
+
+.bc-i-StarCraft2:before {
+    content: "-"
+}
+
+.bc-i-420031083:before {
+    content: ""
+}
+
+.bc-i-ETennis:before {
+    content: ""
+}
+
+.bc-i-eTennis:before {
+    content: ""
+}
+
+.bc-i-EBasketball:before {
+    content: ""
+}
+
+.bc-i-eBasketball:before {
+    content: ""
+}
+
+.bc-i-CyberFootball:before {
+    content: ""
+}
+
+.bc-i-Bowls:before {
+    content: ""
+}
+
+.bc-i-Futsal:before {
+    content: "."
+}
+
+.bc-i-vbet-sport-icons_tablehockey:before {
+    content: "/"
+}
+
+.bc-i-TableHockey:before {
+    content: "/"
+}
+
+.bc-i-vbet-sport-icons_tankbiathlon:before {
+    content: "2"
+}
+
+.bc-i-TankBiathlon:before {
+    content: "2"
+}
+
+.bc-i-TVShowsAndMovies:before {
+    content: "3"
+}
+
+.bc-i-TV1:before {
+    content: "3"
+}
+
+.bc-i-MarathonSwimming:before {
+    content: ""
+}
+
+.bc-i-Olympics:before {
+    content: ""
+}
+
+.bc-i-Skateboarding:before {
+    content: ""
+}
+
+.bc-i-SkateBoarding:before {
+    content: ""
+}
+
+.bc-i-SynchronizedSwimming:before {
+    content: ""
+}
+
+.bc-i-SynchronizedSwimmingF:before {
+    content: ""
+}
+
+.bc-i-Climbing:before {
+    content: ""
+}
+
+.bc-i-Equestrian:before {
+    content: ""
+}
+
+.bc-i-Karate:before {
+    content: ""
+}
+
+.bc-i-vbet-sport-icons_yachting:before {
+    content: ">"
+}
+
+.bc-i-Yachting1:before {
+    content: ">"
+}
+
+.bc-i-Balls:before {
+    content: ""
+}
+
+.bc-i-sport:before {
+    content: ""
+}
+
+.bc-i-AmericanFootball:before {
+    content: ""
+}
+
+.bc-i-Angling:before {
+    content: ""
+}
+
+.bc-i-PistolShooting:before {
+    content: ""
+}
+
+.bc-i-ArcheryH2H:before {
+    content: ""
+}
+
+.bc-i-CompoundArchery:before {
+    content: ""
+}
+
+.bc-i-CompoundArchery1:before {
+    content: ""
+}
+
+.bc-i-Archery:before {
+    content: ""
+}
+
+.bc-i-AustralianFootball:before {
+    content: ""
+}
+
+.bc-i-Badminton:before {
+    content: ""
+}
+
+.bc-i-3x3:before {
+    content: ""
+}
+
+.bc-i-3x3Basketball:before {
+    content: ""
+}
+
+.bc-i-Softball:before {
+    content: ""
+}
+
+.bc-i-Baseball:before {
+    content: ""
+}
+
+.bc-i-Tennis:before {
+    content: ""
+}
+
+.bc-i-Volleyball:before {
+    content: ""
+}
+
+.bc-i-Basketball:before {
+    content: ""
+}
+
+.bc-i-Soccer:before {
+    content: ""
+}
+
+.bc-i-Football:before {
+    content: ""
+}
+
+.bc-i-football:before {
+    content: ""
+}
+
+.bc-i-BasketballShots:before {
+    content: ""
+}
+
+.bc-i-BeachHandball:before {
+    content: ""
+}
+
+.bc-i-BeachFootball:before {
+    content: ""
+}
+
+.bc-i-BeachVolleyball:before {
+    content: ""
+}
+
+.bc-i-Biathlon:before {
+    content: ""
+}
+
+.bc-i-Bobsleigh:before {
+    content: ""
+}
+
+.bc-i-Boxing:before {
+    content: ""
+}
+
+.bc-i-Bridge:before {
+    content: ""
+}
+
+.bc-i-Chess:before {
+    content: ""
+}
+
+.bc-i-Curling:before {
+    content: ""
+}
+
+.bc-i-Cycling:before {
+    content: ""
+}
+
+.bc-i-Cyclo-Cross:before {
+    content: ""
+}
+
+.bc-i-VirtualBicycle:before {
+    content: ""
+}
+
+.bc-i-4000240:before {
+    content: ""
+}
+
+.bc-i-CycloCross:before {
+    content: ""
+}
+
+.bc-i-Darts:before {
+    content: ""
+}
+
+.bc-i-Diving:before {
+    content: ""
+}
+
+.bc-i-Eurovision:before {
+    content: ""
+}
+
+.bc-i-X-Sports:before {
+    content: ""
+}
+
+.bc-i-XSports:before {
+    content: ""
+}
+
+.bc-i-Fencing:before {
+    content: ""
+}
+
+.bc-i-FigureSkating:before {
+    content: ""
+}
+
+.bc-i-Floorball:before {
+    content: ""
+}
+
+.bc-i-GaelicFootball:before {
+    content: ""
+}
+
+.bc-i-Golf:before {
+    content: ""
+}
+
+.bc-i-GrassHockey:before {
+    content: ""
+}
+
+.bc-i-Gymnastics:before {
+    content: ""
+}
+
+.bc-i-Handball:before {
+    content: ""
+}
+
+.bc-i-HandBall:before {
+    content: ""
+}
+
+.bc-i-Weightlifting:before {
+    content: ""
+}
+
+.bc-i-AirHockey:before {
+    content: ""
+}
+
+.bc-i-Cricket:before {
+    content: ""
+}
+
+.bc-i-BallHockey:before {
+    content: ""
+}
+
+.bc-i-Hockey:before {
+    content: ""
+}
+
+.bc-i-Hurling:before {
+    content: ""
+}
+
+.bc-i-IceHockey:before {
+    content: ""
+}
+
+.bc-i-Judo:before {
+    content: ""
+}
+
+.bc-i-Lacross:before {
+    content: ""
+}
+
+.bc-i-Livemonitor:before {
+    content: ""
+}
+
+.bc-i-LiveMonitor:before {
+    content: ""
+}
+
+.bc-i-MiniSoccer:before {
+    content: ""
+}
+
+.bc-i-Greyhounds:before {
+    content: ""
+}
+
+.bc-i-VirtualGreyhoundRacing:before {
+    content: ""
+}
+
+.bc-i-4000238:before {
+    content: ""
+}
+
+.bc-i-420070:before {
+    content: ""
+}
+
+.bc-i-GreyHounds:before {
+    content: ""
+}
+
+.bc-i-PMUHorseRacing:before {
+    content: ""
+}
+
+.bc-i-FutureHorseRacing:before {
+    content: ""
+}
+
+.bc-i-ModernPentathlon:before {
+    content: ""
+}
+
+.bc-i-VirtualHorses:before {
+    content: ""
+}
+
+.bc-i-HorseRacing:before {
+    content: ""
+}
+
+.bc-i-HorseRacingSpecials:before {
+    content: ""
+}
+
+.bc-i-VSHorses:before {
+    content: ""
+}
+
+.bc-i-4000509:before {
+    content: ""
+}
+
+.bc-i-420071:before {
+    content: ""
+}
+
+.bc-i-VirtualDogs:before {
+    content: ""
+}
+
+.bc-i-VirtualHorseRacing:before {
+    content: ""
+}
+
+.bc-i-Motorsport:before {
+    content: ""
+}
+
+.bc-i-MotorSport:before {
+    content: ""
+}
+
+.bc-i-Motorbikes:before {
+    content: ""
+}
+
+.bc-i-4000239:before {
+    content: ""
+}
+
+.bc-i-AutoRacing:before {
+    content: ""
+}
+
+.bc-i-Rally:before {
+    content: ""
+}
+
+.bc-i-BigCityCars:before {
+    content: ""
+}
+
+.bc-i-33060323:before {
+    content: ""
+}
+
+.bc-i-Nascar:before {
+    content: ""
+}
+
+.bc-i-VirtualDragRacing:before {
+    content: ""
+}
+
+.bc-i-Formula1:before {
+    content: ""
+}
+
+.bc-i-Netball:before {
+    content: ""
+}
+
+.bc-i-WinterOlympics:before {
+    content: ""
+}
+
+.bc-i-Oscar:before {
+    content: ""
+}
+
+.bc-i-Pesapallo:before {
+    content: ""
+}
+
+.bc-i-Politics:before {
+    content: ""
+}
+
+.bc-i-Pool:before {
+    content: ""
+}
+
+.bc-i-RinkHockey:before {
+    content: ""
+}
+
+.bc-i-Canoeing:before {
+    content: ""
+}
+
+.bc-i-Rowing:before {
+    content: ""
+}
+
+.bc-i-RugbySevens:before {
+    content: ""
+}
+
+.bc-i-RugbyLeague:before {
+    content: ""
+}
+
+.bc-i-RugbyUnion:before {
+    content: ""
+}
+
+.bc-i-Shooting:before {
+    content: ""
+}
+
+.bc-i-Skeleton:before {
+    content: ""
+}
+
+.bc-i-Swimming:before {
+    content: ""
+}
+
+.bc-i-DiscGolf:before {
+    content: ""
+}
+
+.bc-i-WaterPolo:before {
+    content: ""
+}
+
+.bc-i-vbet-sport-icons_waterpolo:before {
+    content: ""
+}
+
+.bc-i-Schwingen:before {
+    content: ""
+}
+
+.bc-i-FreestyleWrestling:before {
+    content: ""
+}
+
+.bc-i-GrecoRomanWrestling:before {
+    content: ""
+}
+
+.bc-i-Wrestling:before {
+    content: ""
+}
+
+.bc-i-WWE:before {
+    content: ""
+}
+
+.bc-i-Athletics:before {
+    content: ""
+}
+
+.bc-i-Luge:before {
+    content: ""
+}
+
+.bc-i-Speedskating:before {
+    content: ""
+}
+
+.bc-i-SpeedSakting:before {
+    content: ""
+}
+
+.bc-i-ShortTrackSpeedSkating:before {
+    content: ""
+}
+
+.bc-i-Skis:before {
+    content: ""
+}
+
+.bc-i-AlpineSkiing:before {
+    content: ""
+}
+
+.bc-i-CrossCountrySkiing:before {
+    content: ""
+}
+
+.bc-i-SkiJumping:before {
+    content: ""
+}
+
+.bc-i-UltimateFrisbee:before {
+    content: ""
+}
+
+.bc-i-NordicCombined:before {
+    content: ""
+}
+
+.bc-i-Snooker:before {
+    content: ""
+}
+
+.bc-i-Snowboard:before {
+    content: ""
+}
+
+.bc-i-VirtualFootballPro:before {
+    content: ""
+}
+
+.bc-i-400037037:before {
+    content: ""
+}
+
+.bc-i-SoccerWC2014:before {
+    content: ""
+}
+
+.bc-i-SpecialBets:before {
+    content: ""
+}
+
+.bc-i-Speedway:before {
+    content: ""
+}
+
+.bc-i-SpeedWay:before {
+    content: ""
+}
+
+.bc-i-Sumo:before {
+    content: ""
+}
+
+.bc-i-Surfing:before {
+    content: ""
+}
+
+.bc-i-SynchronisedSwimming:before {
+    content: ""
+}
+
+.bc-i-Tablehockey:before {
+    content: ""
+}
+
+.bc-i-Taekwondo:before {
+    content: ""
+}
+
+.bc-i-vbet-sport-icons_taekwondo:before {
+    content: ""
+}
+
+.bc-i-Tankbiathlon:before {
+    content: ""
+}
+
+.bc-i-Telecasts:before {
+    content: ""
+}
+
+.bc-i-TeleCasts:before {
+    content: ""
+}
+
+.bc-i-Triathlon:before {
+    content: ""
+}
+
+.bc-i-vbet-sport-icons_triathlon:before {
+    content: ""
+}
+
+.bc-i-UltimateFighting:before {
+    content: ""
+}
+
+.bc-i-Mma:before {
+    content: ""
+}
+
+.bc-i-SportFight:before {
+    content: ""
+}
+
+.bc-i-vbet-sport-icons_ultimatefighting:before {
+    content: ""
+}
+
+.bc-i-UFS:before {
+    content: ""
+}
+
+.bc-i-Padel:before {
+    content: ""
+}
+
+.bc-i-Squash:before {
+    content: ""
+}
+
+.bc-i-VirtualTennis:before {
+    content: ""
+}
+
+.bc-i-4000236:before {
+    content: ""
+}
+
+.bc-i-TableTennis:before {
+    content: ""
+}
+
+.bc-i-vbet-sport-icons_tabletennis:before {
+    content: ""
+}
+
+.bc-i-missed-penalty:before {
+    content: ""
+}
+
+.bc-i-MissedPenalty:before {
+    content: ""
+}
+
+.bc-i-Pickleball:before {
+    content: ""
+}
+
+.bc-i-ThePenaltyKicks:before {
+    content: ""
+}
+
+.bc-i-55:before {
+    content: ""
+}
+
+.bc-i-penalty:before {
+    content: ""
+}
+
+.bc-i-penality:before {
+    content: ""
+}
+
+.bc-i-333:before {
+    content: ""
+}
+
+.bc-i-Penalty333:before {
+    content: ""
+}
+
+.bc-i-420019282:before {
+    content: ""
+}
+
+.bc-i-Entertainment:before {
+    content: ""
+}

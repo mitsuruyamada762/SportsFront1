@@ -1,0 +1,150 @@
+.sport-list-tree {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.list-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 3px;
+}
+
+.sport-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list-item {
+  height: 35px;
+  padding: 0 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  background: #2e2f30;
+  border-radius: 4px;
+  margin: 2px 0;
+
+  // display: flex;
+  // align-items: center;
+  &:active {
+    background: #393a3b;
+  }
+
+  &.expanded:not(.region) {
+    margin-top: 2px;
+    margin-bottom: 0;
+    border-radius: 4px 4px 0px 0px;
+  }
+
+  &.region {
+    padding: 0px 12px;
+    background: #393a3b;
+    border-radius: 0px;
+    margin: 0px;
+    border-top: #56585a 1px solid;
+
+    &.expanded:not(.competition) {
+      border-top: none;
+      background: #434445;
+    }
+  }
+
+  &.competition {
+    background: #393a3b;
+    margin: 0px;
+
+    &:hover {
+      background: #454547;
+    }
+  }
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 10px;
+}
+
+.item-icon,
+.sport-icon,
+.region-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-style: normal;
+  line-height: 1;
+}
+
+.item-name {
+  flex: 1;
+  font-size: 13px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-count {
+  font-size: 13px;
+  color: #fff;
+  margin-left: auto;
+  padding-right: 8px;
+}
+
+.bc-i-small-arrow-down {
+  font-size: 10px;
+  transition: transform 0.2s;
+  display: inline-block;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.bc-i-small-arrow-right {
+  font-size: 10px;
+  display: inline-block;
+}
+
+.sport-item {
+  list-style: none;
+}
+
+.region-list,
+.competition-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.region-item {
+  list-style: none;
+
+  .list-item.region.expanded~.competition-list {
+    background: #434445;
+    padding: 0 5px 5px;
+  }
+}
+
+.competition-item {
+  list-style: none;
+  margin: 1px;
+
+
+}
+
+.competition-list-mini {
+  padding: 1px;
+  background: #1b1c1e;
+  border-radius: 4px;
+
+}

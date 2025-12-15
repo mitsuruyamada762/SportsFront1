@@ -1,0 +1,8 @@
+.region-item-wrapper {
+  list-style: none;
+
+  .list-item.region.expanded ~ .competition-list {
+    background: #434445;
+    padding: 0 5px 5px;
+  }
+}
