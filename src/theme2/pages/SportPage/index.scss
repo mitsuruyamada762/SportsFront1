@@ -1,0 +1,89 @@
+.sport-page {
+  display: flex;
+  gap: 2px;
+
+  .sport-left-section {
+    flex: 1;
+  }
+
+  .tab-button {
+    background: transparent;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    max-width: 160px;
+    min-width: 125px;
+    height: 48px;
+    opacity: 0.75;
+    padding: 12px 24px 14px;
+    color: var(--text-primary);
+
+    &.active {
+      background: var(--color-primary-bg);
+      color: var(--color-primary-light);
+      border-bottom: var(--color-primary-light) solid 0.3rem;
+      opacity: 1;
+    }
+  }
+
+  .home-caption {
+    color: var(--text-primary);
+    display: block;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -0.05rem;
+  }
+
+  .sport-right-section {
+    height: calc(100vh - 10px);
+    overflow-y: auto;
+
+    /* Scrollbar styling */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 4px;
+      min-height: 40px;
+      height: 40px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--scrollbar-thumb);
+    }
+  }
+
+  .sport-left-section {
+    height: calc(100vh - 10px);
+    overflow-y: auto;
+
+    /* Scrollbar styling */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 4px;
+      min-height: 40px;
+      height: 40px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--scrollbar-thumb);
+    }
+  }
+}

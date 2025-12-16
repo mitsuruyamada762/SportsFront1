@@ -1,0 +1,83 @@
+{
+  "common": {
+    "loading": "Φόρτωση...",
+    "error": "Σφάλμα",
+    "success": "Επιτυχία",
+    "cancel": "Ακύρωση",
+    "save": "Αποθήκευση",
+    "delete": "Διαγραφή",
+    "edit": "Επεξεργασία",
+    "close": "Κλείσιμο",
+    "search": "Αναζήτηση",
+    "filter": "Φίλτρο",
+    "sort": "Ταξινόμηση",
+    "yes": "Ναι",
+    "no": "Όχι"
+  },
+  "navigation": {
+    "home": "Αρχική",
+    "login": "Σύνδεση",
+    "logout": "Αποσύνδεση",
+    "profile": "Προφίλ",
+    "settings": "Ρυθμίσεις"
+  },
+  "pages": {
+    "home": {
+      "title": "Καλώς ήρθατε στο Novibet",
+      "subtitle": "Η καλύτερη εμπειρία στοιχημάτων",
+      "liveMatches": "Ζωντανά Αγώνες",
+      "topBets": "Κορυφαία Στοιχήματα",
+      "promotions": "Προσφορές"
+    },
+    "login": {
+      "title": "Σύνδεση",
+      "username": "Όνομα χρήστη",
+      "password": "Κωδικός πρόσβασης",
+      "rememberMe": "Να με θυμάσαι",
+      "forgotPassword": "Ξεχάσατε τον κωδικό;",
+      "loginButton": "Σύνδεση",
+      "signUp": "Δεν έχετε λογαριασμό; Εγγραφείτε"
+    },
+    "notFound": {
+      "title": "Η Σελίδα Δεν Βρέθηκε",
+      "message": "Η σελίδα που αναζητάτε δεν υπάρχει.",
+      "goHome": "Επιστροφή στην Αρχική"
+    },
+    "liveBetting": {
+      "title": "Ζωντανά Στοιχήματα",
+      "subtitle": "Παίξτε στοιχήματα σε ζωντανά αγώνες και εκδηλώσεις καθώς συμβαίνουν",
+      "liveMatches": "Ζωντανά Αγώνες",
+      "liveFixtures": "Ζωντανά Φιξάρισματα"
+    }
+  },
+  "sports": {
+    "football": "Ποδόσφαιρο",
+    "basketball": "Καλαθοσφαίριση",
+    "tennis": "Τένις",
+    "baseball": "Μπέιζμπολ",
+    "iceHockey": "Χόκεϊ επί πάγου",
+    "americanFootball": "Αμερικανικό Ποδόσφαιρο",
+    "volleyball": "Βόλεϊ",
+    "handball": "Χάντμπολ"
+  },
+  "betting": {
+    "odds": "Πιθανότητες",
+    "stake": "Ποσό",
+    "potentialWin": "Πιθανό Κέρδος",
+    "placeBet": "Τοποθέτηση Στοιχήματος",
+    "live": "Ζωντανά",
+    "upcoming": "Επερχόμενα",
+    "finished": "Τελειωμένα",
+    "matches_one": "{{count}} αγώνας",
+    "matches_other": "{{count}} αγώνες",
+    "bets_one": "{{count}} στοίχημα",
+    "bets_other": "{{count}} στοιχήματα"
+  },
+  "language": {
+    "select": "Επιλογή Γλώσσας",
+    "english": "Αγγλικά",
+    "greek": "Ελληνικά",
+    "german": "Γερμανικά",
+    "french": "Γαλλικά"
+  }
+}

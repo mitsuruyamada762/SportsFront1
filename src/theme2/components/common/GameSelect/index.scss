@@ -1,0 +1,30 @@
+.game-filter-btn {
+  background-color: var(--bg-card);
+  padding: 4px 8px;
+  font-size: 12px;
+  transition: 0.1s ease-in-out;
+  border-radius: 8px;
+  gap: 8px;
+  min-width: 80px;
+}
+
+.game-filter-item {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  height: 36px;
+  min-width: 130px;
+  padding: 0 4px;
+  background-color: var(--bg-card);
+  color: var(--text-dark);
+  transition: 0.1s ease-in-out;
+  gap: 8px;
+  &.active {
+    background-color: var(--color-primary-bg);
+  }
+  &:hover {
+    background-color: var(--color-primary-bg);
+  }
+}

@@ -1,0 +1,13 @@
+/* single item: first + last */
+.acc-item:first-child:last-child {
+    border-radius: 16px;
+}
+
+/* more than one item */
+.acc-item:first-child {
+    border-radius: 16px 16px 0 0;
+}
+
+.acc-item:last-child {
+    border-radius: 0 0 16px 16px;
+}

@@ -1,0 +1,40 @@
+.match-result-item {
+    width: 100%;
+    border-radius: 16px;
+    background: var(--bg-card);
+    padding: 12px;
+
+
+    .star-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+
+        &:active {
+            transform: scale(0.9);
+        }
+    }
+}
+
+
+.odds-item.first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.odds-item.last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.odds-item.both {
+    border-radius: 8px 8px 8px 8px !important;
+
+}

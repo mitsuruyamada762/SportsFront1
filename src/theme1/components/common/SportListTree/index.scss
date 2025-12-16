@@ -148,3 +148,35 @@
   border-radius: 4px;
 
 }
+
+// Skeleton loading items
+.list-item--skeleton {
+  height: 35px;
+  margin: 2px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #2e2f30;
+}
+
+.list-item--skeleton-bar {
+  height: 12px;
+  margin: 11px 10px;
+  border-radius: 4px;
+  background-image: linear-gradient(
+    90deg,
+    #2b2c2f 0px,
+    #3a3b3f 80px,
+    #2b2c2f 160px
+  );
+  background-size: 240px 100%;
+  animation: sport-list-skeleton-shimmer 1.1s infinite linear;
+}
+
+@keyframes sport-list-skeleton-shimmer {
+  0% {
+    background-position: -240px 0;
+  }
+  100% {
+    background-position: calc(240px + 100%) 0;
+  }
+}

@@ -1,0 +1,98 @@
+.betting-filter {
+  display: flex;
+  width: 100%;
+  gap: 30px;
+  .betting-filter-item {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-primary);
+    gap: 8px;
+    cursor: pointer;
+    height: 54px;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 1;
+    background-color: transparent;
+    max-width: 80px;
+    filter: grayscale(1);
+    
+    &:hover {
+      filter: grayscale(0.5);
+      transform: scale(1.05);
+    }
+    
+    &.active {
+      filter: grayscale(0);
+      
+      .img-div {
+        filter: grayscale(0);
+      }
+      
+      .label {
+        font-weight: 700;
+        color: var(--text-primary);
+        opacity: 1;
+      }
+    }
+    .img-div {
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 30px;
+      position: relative;
+      box-sizing: border-box;
+      width: 30px;
+      display: flex;
+      flex-direction: column;
+      filter: grayscale(0);
+      opacity: 1;
+      transition: 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+      img {
+        box-sizing: border-box;
+        height: 30px;
+        width: 30px;
+      }
+    }
+    .label {
+      box-sizing: border-box;
+      display: block;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      max-width: 100%;
+      opacity: 1;
+      overflow: hidden;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: 0.3s cubic-bezier(0.42, 0, 0.58, 1);
+      width: 100%;
+      opacity: 0.5;
+      
+    }
+    .badge {
+      box-sizing: border-box;
+      align-items: center;
+      background-color: var(--text-primary);
+      border-radius: 50%;
+      color: var(--bg-primary);
+      display: flex;
+      font-family: "Open Sans Condensed", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      height: 17px;
+      justify-content: center;
+      line-height: 7px;
+      min-width: 14px;
+      padding: 1px;
+      width: 17px;
+      bottom: -1px;
+      position: absolute;
+      right: -6px;
+    }
+  }
+}

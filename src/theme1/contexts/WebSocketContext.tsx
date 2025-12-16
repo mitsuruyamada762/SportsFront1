@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
     commands,
-    getCompetitionData,
+    getSportsData,
+    getCompetitionsData,
     getGameData,
-    getLiveGamesList,
+    getLiveSportsData,
     groupAndSort,
     mergeCompetitionsIntoA,
     mergeGamesIntoA
@@ -48,6 +49,8 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
     reconnectDelay = 3000,
 
 }) => {
+
+    
     const socket = useRef<WebSocket | null>(null);
     const reconnectAttempts = useRef(0);
     const [isConnected, setIsConnected] = useState(false);
@@ -92,10 +95,7 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
         commands.forEach((cmd) => {
             socket.current?.send(JSON.stringify(cmd));
         });
-        socket.current.send(JSON.stringify(getLiveGamesList()));
-        socket.current.send(JSON.stringify(getCompetitionData(0, 'Soccer', true)));
-
-
+        socket.current.send(JSON.stringify(getSportsData()));
     };
     const extractNestedData = (msg: WSMessage): any => {
         let d = msg.data;
@@ -191,10 +191,10 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
         if (socket.current?.readyState === WebSocket.OPEN) {
             switch (msgData.type) {
                 case 'LiveGamesList':
-                    socket.current.send(JSON.stringify(getLiveGamesList()));
+                    socket.current.send(JSON.stringify(getLiveSportsData()));
                     break;
                 case 'CompetitionData':
-                    socket.current.send(JSON.stringify(getCompetitionData(msgData.id, msgData.alias, msgData.live)));
+                    // socket.current.send(JSON.stringify(getCompetitionData(msgData.id, msgData.alias, msgData.live)));
                     break;
                 case 'GamesData':
                     socket.current.send(JSON.stringify(getGameData(msgData.id, msgData.alias)));

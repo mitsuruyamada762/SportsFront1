@@ -56,27 +56,44 @@ export const CompetitionList: React.FC<CompetitionListProps> = ({
   onToggleDateGroup,
   onToggleFavorite,
 }) => {
+  const isLoading = !dateGroups || dateGroups.length === 0;
+
   return (
     <div className="competition-list">
       <div className="matches-list">
-        {dateGroups.map((dateGroup) => (
-          <div key={dateGroup.date} className="date-group">
-            <DateCompetitionTitle
-              date={dateGroup.date}
-              isExpanded={dateGroup.isExpanded}
-              onClick={() => onToggleDateGroup(dateGroup.date)}
-            />
-
-            {dateGroup.isExpanded && (
-              <div className="matches-container">
-                {dateGroup.matches.map((match) => (
-                  <CompetitionMarketItem key={match.id} match={match} />
-                ))}
+        {isLoading
+          ? Array.from({ length: 2 }).map((_, idx) => (
+              <div key={idx} className="date-group date-group--skeleton">
+                <div className="date-group--skeleton-header" />
+                <div className="matches-container">
+                  {Array.from({ length: 4 }).map((__, rowIdx) => (
+                    <div
+                      key={rowIdx}
+                      className="match-row--skeleton"
+                    />
+                  ))}
+                </div>
               </div>
-            )}
-          </div>
-        ))}
+            ))
+          : dateGroups.map((dateGroup) => (
+              <div key={dateGroup.date} className="date-group">
+                <DateCompetitionTitle
+                  date={dateGroup.date}
+                  isExpanded={dateGroup.isExpanded}
+                  onClick={() => onToggleDateGroup(dateGroup.date)}
+                />
+
+                {dateGroup.isExpanded && (
+                  <div className="matches-container">
+                    {dateGroup.matches.map((match) => (
+                      <CompetitionMarketItem key={match.id} match={match} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
       </div>
     </div>
   );
 };
+

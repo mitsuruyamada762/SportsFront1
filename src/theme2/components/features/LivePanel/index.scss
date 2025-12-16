@@ -1,0 +1,26 @@
+.live-panel-container {
+  display: flex;
+  border-radius: 16px;
+  background: var(--bg-card);
+  padding: 12px;
+  flex-direction: column;
+  .live-panel-icons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    align-items: center;
+    justify-items: center;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    .live-panel-icon {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 36px;;
+      justify-content: center;
+
+      background: var(--bg-card-hover);
+      cursor: pointer;
+    }
+  }
+}

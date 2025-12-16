@@ -2,9 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import './theme1/i18n/index.ts'
-import { ThemeProvider, ScreenSizeProvider, LanguageProvider } from './theme1/contexts/index.ts'
-import { WebSocketProvider } from './theme1/contexts/WebSocketContext.tsx'
+
 
 // Prevent zoom gestures
 const preventZoom = (e: Event) => {
@@ -33,14 +31,8 @@ document.addEventListener('gestureend', (e) => e.preventDefault());
 ReactDOM.createRoot(document.getElementById('root')!).render(
 
   <React.StrictMode>
-    <WebSocketProvider>
-      <LanguageProvider>
-        <ThemeProvider>
-          <ScreenSizeProvider breakpoint={768}>
-            <App />
-          </ScreenSizeProvider>
-        </ThemeProvider>
-      </LanguageProvider>
-    </WebSocketProvider>
+
+    <App />
+
   </React.StrictMode>
 )

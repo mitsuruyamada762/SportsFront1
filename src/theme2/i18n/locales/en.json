@@ -1,0 +1,83 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "navigation": {
+    "home": "Home",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "pages": {
+    "home": {
+      "title": "Welcome to Novibet",
+      "subtitle": "Your premier betting experience",
+      "liveMatches": "Live Matches",
+      "topBets": "Top Bets",
+      "promotions": "Promotions"
+    },
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "loginButton": "Login",
+      "signUp": "Don't have an account? Sign up"
+    },
+    "notFound": {
+      "title": "Page Not Found",
+      "message": "The page you're looking for doesn't exist.",
+      "goHome": "Go Home"
+    },
+    "liveBetting": {
+      "title": "Live Betting",
+      "subtitle": "Bet on live matches and events as they happen",
+      "liveMatches": "Live Matches",
+      "liveFixtures": "Live Fixtures"
+    }
+  },
+  "sports": {
+    "football": "Football",
+    "basketball": "Basketball",
+    "tennis": "Tennis",
+    "baseball": "Baseball",
+    "iceHockey": "Ice Hockey",
+    "americanFootball": "American Football",
+    "volleyball": "Volleyball",
+    "handball": "Handball"
+  },
+  "betting": {
+    "odds": "Odds",
+    "stake": "Stake",
+    "potentialWin": "Potential Win",
+    "placeBet": "Place Bet",
+    "live": "Live",
+    "upcoming": "Upcoming",
+    "finished": "Finished",
+    "matches_one": "{{count}} match",
+    "matches_other": "{{count}} matches",
+    "bets_one": "{{count}} bet",
+    "bets_other": "{{count}} bets"
+  },
+  "language": {
+    "select": "Select Language",
+    "english": "English",
+    "greek": "Greek",
+    "german": "German",
+    "french": "French"
+  }
+}

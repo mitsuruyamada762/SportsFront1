@@ -1,0 +1,45 @@
+.mini-games-container {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+    .mini-games-swiper {
+        width: 100%;
+        
+        .swiper-slide {
+            width: auto !important;
+            flex-shrink: 0;
+        }
+        
+        .game-card {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            
+            &:hover {
+                transform: translateY(-2px);
+            }
+            
+            .game-card-preview {
+                width: 100px;
+                height: 80px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: opacity 0.2s ease;
+                
+                &:hover {
+                    opacity: 0.9;
+                }
+            }
+            
+           
+        }
+    }
+}

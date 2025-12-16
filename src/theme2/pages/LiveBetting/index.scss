@@ -1,0 +1,64 @@
+.live-betting-container {
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 400px;
+  padding: 20px 8px 20px 20px;
+  
+  .left-section {
+    height: calc(100vh - 40px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+    
+    .left-section-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+  
+  .right-section {
+    max-width: 480px;
+    height: calc(100vh - 40px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+    .right-section-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    .title {
+      color: var(--text-primary);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      margin-right: 24px;
+    }
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .live-betting-container {
+    padding: 15px;
+  }
+
+  .live-betting-title {
+    font-size: 2rem;
+  }
+
+  .live-betting-subtitle {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+}

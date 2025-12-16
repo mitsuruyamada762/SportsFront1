@@ -1,0 +1,79 @@
+{
+  "common": {
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "search": "Suchen",
+    "filter": "Filter",
+    "sort": "Sortieren",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "profile": "Profil",
+    "settings": "Einstellungen"
+  },
+  "pages": {
+    "home": {
+      "title": "Willkommen bei Novibet",
+      "subtitle": "Ihre erstklassige Wett-Erfahrung",
+      "liveMatches": "Live-Spiele",
+      "topBets": "Top-Wetten",
+      "promotions": "Aktionen"
+    },
+    "login": {
+      "title": "Anmelden",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "rememberMe": "Angemeldet bleiben",
+      "forgotPassword": "Passwort vergessen?",
+      "loginButton": "Anmelden",
+      "signUp": "Noch kein Konto? Registrieren"
+    },
+    "notFound": {
+      "title": "Seite Nicht Gefunden",
+      "message": "Die gesuchte Seite existiert nicht.",
+      "goHome": "Zur Startseite"
+    },
+    "liveBetting": {
+      "title": "Live-Wetten",
+      "subtitle": "Wetten Sie auf Live-Spiele und Events, während sie stattfinden",
+      "liveMatches": "Live-Spiele",
+      "liveFixtures": "Live-Fixtures"
+    }
+  },
+  "sports": {
+    "football": "Fußball",
+    "basketball": "Basketball",
+    "tennis": "Tennis",
+    "baseball": "Baseball",
+    "iceHockey": "Eishockey",
+    "americanFootball": "American Football",
+    "volleyball": "Volleyball",
+    "handball": "Handball"
+  },
+  "betting": {
+    "odds": "Quoten",
+    "stake": "Einsatz",
+    "potentialWin": "Möglicher Gewinn",
+    "placeBet": "Wette platzieren",
+    "live": "Live",
+    "upcoming": "Bevorstehend",
+    "finished": "Beendet"
+  },
+  "language": {
+    "select": "Sprache Auswählen",
+    "english": "Englisch",
+    "greek": "Griechisch",
+    "german": "Deutsch",
+    "french": "Französisch"
+  }
+}

@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { useWebSocket } from '@/theme1/contexts/WebSocketContext';
-import { getCompetitionData } from '@/theme1/utils';
 import { Sport, Region, Competition } from '@/theme1/types/sportGames';
 import { SPECIAL_ITEMS } from '@/theme1/utils/const';
 import { SpecialItem, SportItem, RegionItem, CompetitionItem } from '@/theme1/components/ui';
@@ -43,6 +42,8 @@ export const SportListTree: React.FC<SportListTreeProps> = ({
     return sports;
   }, [sportsData, searchQuery]);
 
+  const isLoading = sportsList.length === 0;
+
   const handleItemClick = (itemId: string) => {
     if (itemId === 'popular-tournaments') {
       setExpandedItems(prev => {
@@ -80,11 +81,7 @@ export const SportListTree: React.FC<SportListTreeProps> = ({
         newSet.delete(regionKey);
       } else {
         newSet.add(regionKey);
-        // Fetch competition data when expanding if not already in region.competition
-        if (sport.alias && sendMessage && !region.competition) {
-          const msg = getCompetitionData(region.id, sport.alias, activeTab === 'live');
-          sendMessage(msg);
-        }
+
       }
       return newSet;
     });
@@ -105,93 +102,103 @@ export const SportListTree: React.FC<SportListTreeProps> = ({
     <div className="sport-list-tree">
       <div className="list-container">
         <ul className="sport-list">
-          {/* Special Items */}
-          {SPECIAL_ITEMS.map((item) => (
-            <SpecialItem
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              icon={item.icon}
-              hasChildren={item.hasChildren}
-              isExpanded={expandedItems.has(item.id)}
-              onClick={() => handleItemClick(item.id)}
-            />
-          ))}
-
-          {/* Sports List */}
-          {sportsList.map((sport) => {
-            const isExpanded = isSportExpanded(sport.id!);
-
-            return (
-              <li key={sport.id} className="sport-item">
-                <SportItem
-                  sport={sport}
-                  isExpanded={isExpanded}
-                  onClick={() => handleSportClick(sport)}
-                />
-
-                {/* Regions (Countries/Areas) */}
-                {isExpanded && sport.region && (
-                  <div className="region-list">
-                    {Object.values(sport.region)
-                      .filter((r): r is Region => !!r && typeof r === 'object' && 'id' in r)
-                      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-                      .map((region) => {
-                        const isRegionExp = isRegionExpanded(sport.id!, region.id);
-                        
-                        // Get competitions for this region
-                        const regionCompetitions: Competition[] = region.competition
-                          ? Object.values(region.competition).filter((c): c is Competition =>
-                            !!c && typeof c === 'object' && 'id' in c
-                          )
-                          : [];
-
-                        const dataCompetitions = Object.values(competitionsData)
-                          .filter((comp): comp is Competition => {
-                            return !!comp && typeof comp === 'object' && 'id' in comp;
-                          });
-
-                        const allCompetitions: Competition[] = [...regionCompetitions];
-                        const competitionIds = new Set(regionCompetitions.map(c => c.id));
-
-                        dataCompetitions.forEach(comp => {
-                          if (comp.id && !competitionIds.has(comp.id)) {
-                            allCompetitions.push(comp);
-                            competitionIds.add(comp.id);
-                          }
-                        });
-
-                        const sortedCompetitions = allCompetitions
-                          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-
-                        return (
-                          <RegionItem
-                            key={region.id}
-                            region={region}
-                            isExpanded={isRegionExp}
-                            count={getRegionCount(region)}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleRegionClick(sport, region);
-                            }}
-                          >
-                            <div className="competition-list-mini">
-                              {sortedCompetitions.map((competition) => (
-                                <CompetitionItem
-                                  key={competition.id}
-                                  competition={competition}
-                                  count={getCompetitionCount(competition)}
-                                />
-                              ))}
-                            </div>
-                          </RegionItem>
-                        );
-                      })}
-                  </div>
-                )}
+          {isLoading ? (
+            Array.from({ length: 15 }).map((_, index) => (
+              <li key={index} className="list-item list-item--skeleton">
+                <div className="list-item--skeleton-bar" />
               </li>
-            );
-          })}
+            ))
+          ) : (
+            <>
+              {/* Special Items */}
+              {SPECIAL_ITEMS.map((item) => (
+                <SpecialItem
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  icon={item.icon}
+                  hasChildren={item.hasChildren}
+                  isExpanded={expandedItems.has(item.id)}
+                  onClick={() => handleItemClick(item.id)}
+                />
+              ))}
+
+              {/* Sports List */}
+              {sportsList.map((sport) => {
+                const isExpanded = isSportExpanded(sport.id!);
+
+                return (
+                  <li key={sport.id} className="sport-item">
+                    <SportItem
+                      sport={sport}
+                      isExpanded={isExpanded}
+                      onClick={() => handleSportClick(sport)}
+                    />
+
+                    {/* Regions (Countries/Areas) */}
+                    {isExpanded && sport.region && (
+                      <div className="region-list">
+                        {Object.values(sport.region)
+                          .filter((r): r is Region => !!r && typeof r === 'object' && 'id' in r)
+                          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+                          .map((region) => {
+                            const isRegionExp = isRegionExpanded(sport.id!, region.id);
+
+                            // Get competitions for this region
+                            const regionCompetitions: Competition[] = region.competition
+                              ? Object.values(region.competition).filter((c): c is Competition =>
+                                !!c && typeof c === 'object' && 'id' in c
+                              )
+                              : [];
+
+                            const dataCompetitions = Object.values(competitionsData)
+                              .filter((comp): comp is Competition => {
+                                return !!comp && typeof comp === 'object' && 'id' in comp;
+                              });
+
+                            const allCompetitions: Competition[] = [...regionCompetitions];
+                            const competitionIds = new Set(regionCompetitions.map(c => c.id));
+
+                            dataCompetitions.forEach(comp => {
+                              if (comp.id && !competitionIds.has(comp.id)) {
+                                allCompetitions.push(comp);
+                                competitionIds.add(comp.id);
+                              }
+                            });
+
+                            const sortedCompetitions = allCompetitions
+                              .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+                            return (
+                              <RegionItem
+                                key={region.id}
+                                region={region}
+                                isExpanded={isRegionExp}
+                                count={getRegionCount(region)}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleRegionClick(sport, region);
+                                }}
+                              >
+                                <div className="competition-list-mini">
+                                  {sortedCompetitions.map((competition) => (
+                                    <CompetitionItem
+                                      key={competition.id}
+                                      competition={competition}
+                                      count={getCompetitionCount(competition)}
+                                    />
+                                  ))}
+                                </div>
+                              </RegionItem>
+                            );
+                          })}
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </>
+          )}
         </ul>
       </div>
     </div>

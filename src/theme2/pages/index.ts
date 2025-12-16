@@ -1,0 +1,7 @@
+export { HomePage } from './HomePage'
+export { AboutPage } from './AboutPage'
+export { NotFoundPage } from './NotFoundPage'
+export { LoginPage } from './Login'
+export { LiveBettingPage } from './LiveBetting'
+export { LiveSchedulePage } from './LiveSchedule'
+export { SportPage } from './SportPage'

@@ -1,0 +1,110 @@
+.live-schedule-page {
+  width: 100%;
+  height: 100%;
+  padding: 20px 0px 20px 20px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 370px;
+  .live-schedule-page-header {
+    .left-header-section {
+      .title {
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: -0.6px;
+        color: white;
+      }
+    }
+  }
+
+  .left-content-section {
+    
+    overflow-y: scroll;
+    padding-right: 0px;
+    // Always show scrollbar space but make it invisible
+    scrollbar-width: thin; // Firefox - always thin
+    scrollbar-color: transparent transparent; // Firefox - invisible by default
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
+
+    // Show scrollbar on hover
+    &:hover {
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent; // Firefox
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    .left-section-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  .right-content-section {
+    width: 370px;
+    min-width: 368px;
+    max-width: 488px;
+    padding-bottom: 60px;
+    padding-right: 8px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    // Always show scrollbar space but make it invisible
+    scrollbar-width: thin; // Firefox - always thin
+    scrollbar-color: transparent transparent; // Firefox - invisible by default
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
+
+    // Show scrollbar on hover
+    &:hover {
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent; // Firefox
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    .right-section-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  .live-schedule-page-content {
+    gap: 1px;
+  }
+}

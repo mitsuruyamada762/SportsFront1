@@ -1,0 +1,53 @@
+.leagues-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  border-radius: 16px;
+  overflow: hidden;
+
+  .league-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1px;
+    height: 48px;
+    width: 100%;
+    background: #0d38590d;
+    cursor: pointer;
+    gap: 1px;
+    &:hover {
+      background: hsl(186.32deg 30.16% 87.65%);
+    }
+    .plus-icon {
+      width: 48px;
+      min-width: 48px;
+      border-left: 1px solid #ffffff;
+      height: 100%;
+      opacity: 0.7;
+      @apply flex items-center justify-center cursor-pointer;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .country-name {
+      font-weight: 400;
+      opacity: 0.75;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 12px;
+      font-size: 12px;
+      color: #333333;
+    }
+
+    .league-name {
+      color: #0a1324;
+      cursor: unset;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #0a1324;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+}

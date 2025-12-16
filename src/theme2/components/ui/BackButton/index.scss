@@ -1,0 +1,23 @@
+.btn-back {
+    display: flex;
+    border-radius: 20px;
+    background: var(--bg-card);
+    font-size: 11px;
+    padding: 6px 14px;
+    align-items: center;
+    gap: 4px;
+    height: 36px;
+    color: var(--text-primary);
+    flex-shrink: 0;
+    &.white {
+      color: var(--text-dark);
+      background: #0d38591a;
+      &:hover {
+        background: #103a5a33;
+      }
+    }
+
+    &:hover {
+      background: var(--bg-card-hover);
+    }
+  }

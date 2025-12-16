@@ -1,0 +1,13 @@
+.time-swiper-container {
+    width: 100%;
+    
+    .swiper-slide {
+        width: auto !important;
+        flex-shrink: 0;
+        
+        button {
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+    }
+}

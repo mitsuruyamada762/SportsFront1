@@ -1,0 +1,79 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "profile": "Profil",
+    "settings": "Paramètres"
+  },
+  "pages": {
+    "home": {
+      "title": "Bienvenue sur Novibet",
+      "subtitle": "Votre expérience de paris de premier plan",
+      "liveMatches": "Matchs en Direct",
+      "topBets": "Meilleurs Paris",
+      "promotions": "Promotions"
+    },
+    "login": {
+      "title": "Connexion",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe",
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié ?",
+      "loginButton": "Se connecter",
+      "signUp": "Pas de compte ? S'inscrire"
+    },
+    "notFound": {
+      "title": "Page Non Trouvée",
+      "message": "La page que vous recherchez n'existe pas.",
+      "goHome": "Retour à l'Accueil"
+    },
+    "liveBetting": {
+      "title": "Paris en Direct",
+      "subtitle": "Pariez sur des matchs et événements en direct au fur et à mesure qu'ils se déroulent",
+      "liveMatches": "Matchs en Direct",
+      "liveFixtures": "Rencontres en Direct"
+    }
+  },
+  "sports": {
+    "football": "Football",
+    "basketball": "Basketball",
+    "tennis": "Tennis",
+    "baseball": "Baseball",
+    "iceHockey": "Hockey sur Glace",
+    "americanFootball": "Football Américain",
+    "volleyball": "Volleyball",
+    "handball": "Handball"
+  },
+  "betting": {
+    "odds": "Cotes",
+    "stake": "Mise",
+    "potentialWin": "Gain Potentiel",
+    "placeBet": "Placer un Pari",
+    "live": "En Direct",
+    "upcoming": "À Venir",
+    "finished": "Terminé"
+  },
+  "language": {
+    "select": "Sélectionner la Langue",
+    "english": "Anglais",
+    "greek": "Grec",
+    "german": "Allemand",
+    "french": "Français"
+  }
+}
