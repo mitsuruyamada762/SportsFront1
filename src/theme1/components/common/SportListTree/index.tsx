@@ -22,6 +22,7 @@ export const SportListTree: React.FC<SportListTreeProps> = ({
   onSportSelect,
   onRegionSelect,
 }) => {
+  
   const { sportsData, competitionsData, sendMessage } = useWebSocket();
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [expandedRegions, setExpandedRegions] = useState<Set<string>>(new Set());
@@ -29,9 +30,6 @@ export const SportListTree: React.FC<SportListTreeProps> = ({
   // Get sorted sports list
   const sportsList = useMemo(() => {
     const sports = Object.values(sportsData)
-      .filter((s): s is Sport => !!s && typeof s === 'object' && 'id' in s && !!s.region)
-      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       return sports.filter(sport =>
@@ -91,10 +89,6 @@ export const SportListTree: React.FC<SportListTreeProps> = ({
     return region.regionTotal || 0;
   };
 
-  const getCompetitionCount = (competition: Competition): number => {
-    return Object.keys(competition.game || {}).length;
-  };
-
   const isSportExpanded = (sportId: number) => expandedItems.has(`sport-${sportId}`);
   const isRegionExpanded = (sportId: number, regionId: number) => expandedRegions.has(`region-${sportId}-${regionId}`);
 
@@ -139,8 +133,6 @@ export const SportListTree: React.FC<SportListTreeProps> = ({
                     {isExpanded && sport.region && (
                       <div className="region-list">
                         {Object.values(sport.region)
-                          .filter((r): r is Region => !!r && typeof r === 'object' && 'id' in r)
-                          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
                           .map((region) => {
                             const isRegionExp = isRegionExpanded(sport.id!, region.id);
 
@@ -185,7 +177,7 @@ export const SportListTree: React.FC<SportListTreeProps> = ({
                                     <CompetitionItem
                                       key={competition.id}
                                       competition={competition}
-                                      count={getCompetitionCount(competition)}
+                                      count={competition.game}
                                     />
                                   ))}
                                 </div>

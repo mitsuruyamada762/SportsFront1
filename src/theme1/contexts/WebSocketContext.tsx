@@ -18,7 +18,6 @@ interface WebSocketContextType {
     sportsData: Record<number, Sport>;
     competitionsData: Record<number, Competition>;
     gamesData: Record<number, Game>;
-    liveGamesList: any;
     sortedMarketsData: any;
     sendMessage: (msg: any) => void;
 }
@@ -29,7 +28,6 @@ const WebSocketContext = createContext<WebSocketContextType>({
     sportsData: {},
     competitionsData: {},
     gamesData: {},
-    liveGamesList: {},
     sortedMarketsData: [],
     sendMessage: () => { },
 });
@@ -50,16 +48,15 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
 
 }) => {
 
-    
+
     const socket = useRef<WebSocket | null>(null);
     const reconnectAttempts = useRef(0);
     const [isConnected, setIsConnected] = useState(false);
-    const [sportsData, setSportsData] = useState<Record<number, Sport>>({});
+    const [sportsData, setSportsData] = useState<Record<number, Sport>>([]);
     const [gamesData, setGamesData] = useState<Record<number, Game>>({});
     const [tmpGameData, setTmpGameData] = useState<Record<number, Game>>({});
     const [competitionsData, setCompetitionsData] = useState<Record<number, Competition>>({});
     const [tmpCompetitionData, setTmpCompetitionData] = useState<Record<number, Competition>>({});
-    const [liveGamesList, setLiveGamesList] = useState<Record<number, Sport>>({})
 
     const connectWS = () => {
         if (socket.current?.readyState === WebSocket.OPEN) return;
@@ -107,40 +104,21 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
         const data = message.rid ? extractNestedData(message) : message.data ?? message;
         if (!data) return;
         if (data.sport) {
-
-            const sports: Sport[] = Object.values(data.sport);
-
-            setSportsData(prev => {
-                const hasRegion = sports.some(l => l.region);
-                if (hasRegion) {
-
-                    const updated: Record<number, typeof sports[0]> = {};
-                    sports.forEach(s => {
-                        if (s.id && s.region) {
-                            updated[s.id] = { ...s };
-                        }
-                    });
-                    return updated;
-                }
-                return prev
-            });
-
-            setLiveGamesList(prev => {
-                const hasNoRegion = sports.some(l => !l.region);
-
-                if (hasNoRegion) {
-                    const updated: Record<number, typeof sports[0]> = {};
-                    sports.forEach(l => {
-                        if (l.id) {
-                            updated[l.id] = { ...l };
-                        }
-                    });
-                    return updated;
-                }
-                return prev;
-            });
-
-
+            const sports: Sport[] = Object.values(data.sport ?? {})
+            const sortedSports = [...sports]
+                .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+                .map((s: any) => ({
+                    ...s,
+                    region: Object.values(s.region)
+                        .sort((a: any, b: any) => a.order - b.order)
+                        .map((r: any) => ({
+                            ...r,
+                            competition: Object.values(r.competition)
+                                .sort((a: any, b: any) => a.order - b.order),
+                        })),
+                }));
+            sendMessage({ id: sortedSports[0]?.region[0]?.competition[0]?.id, alias: sortedSports[0].alias, type: "CompetitionData" })
+            setSportsData(sortedSports);
         } else if (data.competition) {
             const competitions: Competition[] = Object.values(data.competition);
 
@@ -194,7 +172,7 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
                     socket.current.send(JSON.stringify(getLiveSportsData()));
                     break;
                 case 'CompetitionData':
-                    // socket.current.send(JSON.stringify(getCompetitionData(msgData.id, msgData.alias, msgData.live)));
+                    socket.current.send(JSON.stringify(getCompetitionsData(msgData.id, msgData.alias)));
                     break;
                 case 'GamesData':
                     socket.current.send(JSON.stringify(getGameData(msgData.id, msgData.alias)));
@@ -209,6 +187,7 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
     const game = Object.values(gamesData).find((game: any) => game.id);
     const marketObj = game?.market ?? {};
     const sortedMarketsData = groupAndSort(Object.values(marketObj));
+
     useEffect(() => {
         if (tmpCompetitionData && competitionsData) {
             mergeCompetitionsIntoA(competitionsData, tmpCompetitionData[0])
@@ -247,8 +226,10 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
             socket.current?.close();
         };
     }, []);
+
+    console.log("asdfas", sportsData)
     return (
-        <WebSocketContext.Provider value={{ socket: socket.current, isConnected, sportsData, competitionsData, gamesData, liveGamesList, sortedMarketsData, sendMessage }}>
+        <WebSocketContext.Provider value={{ socket: socket.current, isConnected, sportsData, competitionsData, gamesData, sortedMarketsData, sendMessage }}>
             {children}
         </WebSocketContext.Provider>
     );

@@ -16,7 +16,7 @@ interface GroupedItem {
     };
 }
 
-export function groupAndSort(data: any) {
+export const groupAndSort = (data: any) => {
     const groups: Record<number, GroupedItem> = {};
 
     for (const item of data) {
@@ -51,7 +51,7 @@ export function groupAndSort(data: any) {
 
 
 
-export function mergeCompetitionsIntoA(A: any, B: any) {
+export const mergeCompetitionsIntoA = (A: any, B: any) => {
     if (B) {
         for (const compId in B) {
             if (A[compId]) {
@@ -66,7 +66,7 @@ export function mergeCompetitionsIntoA(A: any, B: any) {
     return A;
 }
 
-export function mergeGamesIntoA(A: any, B: any) {
+export const mergeGamesIntoA = (A: any, B: any) => {
     for (const compId in B) {
         const BComp = B[compId];
         if (!BComp) continue;
@@ -86,7 +86,7 @@ export function mergeGamesIntoA(A: any, B: any) {
 
 
 
-export function deepMerge(target: any, source: any) {
+export const deepMerge = (target: any, source: any) => {
     for (const key in source) {
         if (source[key] && typeof source[key] === "object" && !Array.isArray(source[key])) {
             if (!target[key] || typeof target[key] !== "object") target[key] = {};

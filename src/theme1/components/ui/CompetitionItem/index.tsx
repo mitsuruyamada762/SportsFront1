@@ -4,7 +4,7 @@ import './index.scss';
 
 interface CompetitionItemProps {
   competition: Competition;
-  count: number;
+  count: any;
   onClick?: (e: React.MouseEvent) => void;
 }
 
