@@ -1,0 +1,85 @@
+.navigation-bar {
+  display: flex;
+  align-items: center;
+  background: #2e2f30;
+  height: 40px;
+  gap: 12px;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  width: 100%;
+  min-width: 0; // Allows flex children to shrink below their content size
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; // Prevents this section from shrinking
+
+  div {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7c7d7e;
+
+    &:first-child {
+      background: #454547;
+      border-radius: 4px 0px 0px 4px;
+    }
+  }
+
+  .nav-scroll-icon {
+    font-size: 16px;
+    color: #fff;
+    transition: color 0.2s;
+    font-size: 12px;
+
+    &.nav-scroll-left {
+      transform: rotateY(180deg);
+    }
+  }
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 0;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  overflow-x: hidden; // Changed from hidden to auto to enable scrolling
+  flex: 1; // Takes up remaining space
+  min-width: 0; // Allows flex item to shrink below content size
+}
+
+.nav-tab {
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  color: #7c7d7e;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+
+  &.active {
+    color: #fff;
+  }
+
+  .tab-count {
+    font-size: 10px;
+    margin-left: 2px;
+    vertical-align: super;
+  }
+}
+
+.nav-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+
+  .nav-scroll-icon {
+    font-size: 12px;
+    color: #fff;
+    transition: color 0.2s;
+  }
+}

@@ -1,0 +1,124 @@
+// GameHeader styles - extracted from GameDetailContent
+.game-header {
+  position: relative;
+  height: 197px;
+  border-radius: 4px;
+  padding: 10px 0px;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+.header-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+
+  .background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+  }
+}
+
+.header-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+}
+
+.league-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .league-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .league-name {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 500;
+  }
+}
+
+.match-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.teams-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .team-name {
+    font-size: 16px;
+    color: #fff;
+  }
+
+  .team-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+
+    .status-indicators {
+      display: flex;
+      gap: 4px;
+
+      .indicator {
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -10px;
+        font-size: 14px;
+        border-radius: 2px;
+        color: #fff;
+
+        &.m {
+          background: #101510;
+          color: red;
+        }
+
+        &.b {
+          background: #101510;
+          color: green;
+        }
+      }
+    }
+  }
+}

@@ -31,8 +31,6 @@ document.addEventListener('gestureend', (e) => e.preventDefault());
 ReactDOM.createRoot(document.getElementById('root')!).render(
 
   <React.StrictMode>
-
     <App />
-
   </React.StrictMode>
 )

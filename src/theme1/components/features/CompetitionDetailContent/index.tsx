@@ -1,344 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   CompetitionTitle,
   CompetitionFilter,
   CompetitionList,
   type DateGroup,
   type CategoryGroup,
+  type Match,
 } from '@/theme1/components/common';
 import './index.scss';
+import { useWebSocket } from '@/theme1/contexts';
 
-const initialMatches: DateGroup[] = [
-  {
-    date: '21.01.2026',
-    isExpanded: true,
-    matches: [
-      {
-        id: '1',
-        homeTeam: 'FC Kairat Almaty',
-        awayTeam: 'Club Brugge',
-        time: '00:30',
-        isFavorite: true,
-        winningOdds: {
-          home: { value: '4.33' },
-          draw: { value: '4.50' },
-          away: { value: '1.69' },
-        },
-        handicapOdds: {
-          handicap: '+0.75-',
-          home: { value: '2.00' },
-          away: { value: '1.85' },
-        },
-        totalsOdds: {
-          total: '2.75',
-          over: { value: '1.88' },
-          under: { value: '1.96' },
-        },
-        moreBetsCount: 324,
-      },
-      {
-        id: '2',
-        homeTeam: 'Team A',
-        awayTeam: 'Team B',
-        time: '02:00',
-        isFavorite: false,
-        winningOdds: {
-          home: { value: '2.10' },
-          draw: { value: '3.20' },
-          away: { value: '3.50' },
-        },
-        handicapOdds: {
-          handicap: '+1.5-',
-          home: { value: '1.90' },
-          away: { value: '1.95' },
-        },
-        totalsOdds: {
-          total: '3.5',
-          over: { value: '2.10' },
-          under: { value: '1.75' },
-        },
-        moreBetsCount: 287,
-      },
-      {
-        id: '3',
-        homeTeam: 'Team C',
-        awayTeam: 'Team D',
-        time: '18:45',
-        isFavorite: true,
-        winningOdds: {
-          home: { value: '1.85' },
-          draw: { value: '3.60' },
-          away: { value: '4.20' },
-        },
-        handicapOdds: {
-          handicap: '0',
-          home: { value: '1.95' },
-          away: { value: '1.90' },
-        },
-        totalsOdds: {
-          total: '2.5',
-          over: { value: '1.80' },
-          under: { value: '2.05' },
-        },
-        moreBetsCount: 312,
-      },
-    ],
-  },
-  {
-    date: '1.01.2026',
-    isExpanded: true,
-    matches: [
-      {
-        id: '1',
-        homeTeam: 'FC Kairat Almaty',
-        awayTeam: 'Club Brugge',
-        time: '00:30',
-        isFavorite: true,
-        winningOdds: {
-          home: { value: '4.33' },
-          draw: { value: '4.50' },
-          away: { value: '1.69' },
-        },
-        handicapOdds: {
-          handicap: '+0.75-',
-          home: { value: '2.00' },
-          away: { value: '1.85' },
-        },
-        totalsOdds: {
-          total: '2.75',
-          over: { value: '1.88' },
-          under: { value: '1.96' },
-        },
-        moreBetsCount: 324,
-      },
-      {
-        id: '2',
-        homeTeam: 'Team A',
-        awayTeam: 'Team B',
-        time: '02:00',
-        isFavorite: false,
-        winningOdds: {
-          home: { value: '2.10' },
-          draw: { value: '3.20' },
-          away: { value: '3.50' },
-        },
-        handicapOdds: {
-          handicap: '+1.5-',
-          home: { value: '1.90' },
-          away: { value: '1.95' },
-        },
-        totalsOdds: {
-          total: '3.5',
-          over: { value: '2.10' },
-          under: { value: '1.75' },
-        },
-        moreBetsCount: 287,
-      },
-      {
-        id: '3',
-        homeTeam: 'Team C',
-        awayTeam: 'Team D',
-        time: '18:45',
-        isFavorite: true,
-        winningOdds: {
-          home: { value: '1.85' },
-          draw: { value: '3.60' },
-          away: { value: '4.20' },
-        },
-        handicapOdds: {
-          handicap: '0',
-          home: { value: '1.95' },
-          away: { value: '1.90' },
-        },
-        totalsOdds: {
-          total: '2.5',
-          over: { value: '1.80' },
-          under: { value: '2.05' },
-        },
-        moreBetsCount: 312,
-      },
-    ],
-  },
-  {
-    date: '26.01.2026',
-    isExpanded: true,
-    matches: [
-      {
-        id: '1',
-        homeTeam: 'FC Kairat Almaty',
-        awayTeam: 'Club Brugge',
-        time: '00:30',
-        isFavorite: true,
-        winningOdds: {
-          home: { value: '4.33' },
-          draw: { value: '4.50' },
-          away: { value: '1.69' },
-        },
-        handicapOdds: {
-          handicap: '+0.75-',
-          home: { value: '2.00' },
-          away: { value: '1.85' },
-        },
-        totalsOdds: {
-          total: '2.75',
-          over: { value: '1.88' },
-          under: { value: '1.96' },
-        },
-        moreBetsCount: 324,
-      },
-      {
-        id: '2',
-        homeTeam: 'Team A',
-        awayTeam: 'Team B',
-        time: '02:00',
-        isFavorite: false,
-        winningOdds: {
-          home: { value: '2.10' },
-          draw: { value: '3.20' },
-          away: { value: '3.50' },
-        },
-        handicapOdds: {
-          handicap: '+1.5-',
-          home: { value: '1.90' },
-          away: { value: '1.95' },
-        },
-        totalsOdds: {
-          total: '3.5',
-          over: { value: '2.10' },
-          under: { value: '1.75' },
-        },
-        moreBetsCount: 287,
-      },
-      {
-        id: '3',
-        homeTeam: 'Team C',
-        awayTeam: 'Team D',
-        time: '18:45',
-        isFavorite: true,
-        winningOdds: {
-          home: { value: '1.85' },
-          draw: { value: '3.60' },
-          away: { value: '4.20' },
-        },
-        handicapOdds: {
-          handicap: '0',
-          home: { value: '1.95' },
-          away: { value: '1.90' },
-        },
-        totalsOdds: {
-          total: '2.5',
-          over: { value: '1.80' },
-          under: { value: '2.05' },
-        },
-        moreBetsCount: 312,
-      },
-    ],
-  },
-  {
-    date: '24.01.2026',
-    isExpanded: true,
-    matches: [
-      {
-        id: '1',
-        homeTeam: 'FC Kairat Almaty',
-        awayTeam: 'Club Brugge',
-        time: '00:30',
-        isFavorite: true,
-        winningOdds: {
-          home: { value: '4.33' },
-          draw: { value: '4.50' },
-          away: { value: '1.69' },
-        },
-        handicapOdds: {
-          handicap: '+0.75-',
-          home: { value: '2.00' },
-          away: { value: '1.85' },
-        },
-        totalsOdds: {
-          total: '2.75',
-          over: { value: '1.88' },
-          under: { value: '1.96' },
-        },
-        moreBetsCount: 324,
-      },
-      {
-        id: '2',
-        homeTeam: 'Team A',
-        awayTeam: 'Team B',
-        time: '02:00',
-        isFavorite: false,
-        winningOdds: {
-          home: { value: '2.10' },
-          draw: { value: '3.20' },
-          away: { value: '3.50' },
-        },
-        handicapOdds: {
-          handicap: '+1.5-',
-          home: { value: '1.90' },
-          away: { value: '1.95' },
-        },
-        totalsOdds: {
-          total: '3.5',
-          over: { value: '2.10' },
-          under: { value: '1.75' },
-        },
-        moreBetsCount: 287,
-      },
-      {
-        id: '3',
-        homeTeam: 'Team C',
-        awayTeam: 'Team D',
-        time: '18:45',
-        isFavorite: true,
-        winningOdds: {
-          home: { value: '1.85' },
-          draw: { value: '3.60' },
-          away: { value: '4.20' },
-        },
-        handicapOdds: {
-          handicap: '0',
-          home: { value: '1.95' },
-          away: { value: '1.90' },
-        },
-        totalsOdds: {
-          total: '2.5',
-          over: { value: '1.80' },
-          under: { value: '2.05' },
-        },
-        moreBetsCount: 312,
-      },
-    ],
-  },
-  {
-    date: '22.01.2026',
-    isExpanded: false,
-    matches: [
-      {
-        id: '4',
-        homeTeam: 'Team E',
-        awayTeam: 'Team F',
-        time: '20:00',
-        isFavorite: false,
-        winningOdds: {
-          home: { value: '2.50' },
-          draw: { value: '3.00' },
-          away: { value: '2.80' },
-        },
-        handicapOdds: {
-          handicap: '-1.75+',
-          home: { value: '2.15' },
-          away: { value: '1.70' },
-        },
-        totalsOdds: {
-          total: '2.75',
-          over: { value: '1.92' },
-          under: { value: '1.92' },
-        },
-        moreBetsCount: 298,
-      },
-    ],
-  },
-];
 
 const bettingCategories: CategoryGroup[] = [
   {
@@ -350,6 +21,13 @@ const bettingCategories: CategoryGroup[] = [
     ],
   },
   {
+    header: 'HANDICAP',
+    options: [
+      { label: 'HOME', value: 'HOME' },
+      { label: 'AWAY', value: 'AWAY' },
+    ],
+  },
+  {
     header: 'TOTALS',
     options: [
       { label: 'TOP', value: 'TOP' },
@@ -358,11 +36,225 @@ const bettingCategories: CategoryGroup[] = [
   },
 ];
 
+// Helper function to extract winning odds from market data
+const extractWinningOdds = (market: any): { home: string; draw: string; away: string } => {
+  if (!market || typeof market !== 'object') {
+    return { home: '-', draw: '-', away: '-' };
+  }
+
+  const marketValues = Object.values(market) as any[];
+  const winnerMarket = marketValues.find(
+    (m: any) => m?.type === 'P1XP2' || m?.type === 'MatchResult' || m?.display_key === 'WINNER'
+  );
+
+  if (!winnerMarket?.event) {
+    return { home: '-', draw: '-', away: '-' };
+  }
+
+  const events = Object.values(winnerMarket.event) as any[];
+  const odds = { home: '-', draw: '-', away: '-' };
+
+  events.forEach((event: any) => {
+    const type1 = event?.type_1 || '';
+    const name = event?.name || '';
+    const price = event?.price || 0;
+
+    if (type1 === 'W1' || name === 'W1') {
+      odds.home = price.toString();
+    } else if (type1 === 'W2' || name === 'W2') {
+      odds.away = price.toString();
+    } else if (type1 === 'X' || name === 'Draw' || name === 'X') {
+      odds.draw = price.toString();
+    }
+  });
+
+  return odds;
+};
+
+// Helper function to extract totals odds from market data
+const extractTotalsOdds = (market: any): { total: string; over: string; under: string } | undefined => {
+  if (!market || typeof market !== 'object') {
+    return undefined;
+  }
+
+  const marketValues = Object.values(market) as any[];
+  const totalsMarket = marketValues.find(
+    (m: any) => m?.type === 'OverUnder' || m?.display_key === 'TOTALS'
+  );
+
+  if (!totalsMarket?.event) {
+    return undefined;
+  }
+
+  const events = Object.values(totalsMarket.event) as any[];
+  const result = { total: '2.5', over: '-', under: '-' };
+
+  // Get base value from first event
+  if (events.length > 0 && events[0].base !== undefined) {
+    result.total = events[0].base.toString();
+  }
+
+  events.forEach((event: any) => {
+    const name = (event?.name || '').trim();
+    const price = event?.price || 0;
+
+    if (name === 'Over') {
+      result.over = price.toString();
+    } else if (name === 'Under') {
+      result.under = price.toString();
+    }
+  });
+
+  return result.over !== '-' || result.under !== '-' ? result : undefined;
+};
+
+// Helper function to extract handicap odds from market data
+const extractHandicapOdds = (market: any): { handicap: string; home: string; away: string } | undefined => {
+  if (!market || typeof market !== 'object') {
+    return undefined;
+  }
+
+  const marketValues = Object.values(market) as any[];
+  const handicapMarket = marketValues.find(
+    (m: any) => m?.display_key === 'HANDICAP' || m?.type === 'Handicap'
+  );
+
+  if (!handicapMarket?.event) {
+    return undefined;
+  }
+
+  const events = Object.values(handicapMarket.event) as any[];
+  const result = { handicap: '0', home: '-', away: '-' };
+
+  // Collect all unique base values from events
+  const baseValues = new Set<number>();
+
+  // First, check market base value
+  if (handicapMarket.base !== undefined) {
+    baseValues.add(handicapMarket.base);
+  }
+
+  // Then collect base values from all events
+  events.forEach((event: any) => {
+    if (event?.base !== undefined) {
+      baseValues.add(event.base);
+    }
+  });
+
+  // Format handicap value
+  if (baseValues.size === 0) {
+    result.handicap = '0';
+  } else if (baseValues.size === 1) {
+    // Single value - use as is
+    result.handicap = Array.from(baseValues)[0].toString();
+  } else {
+    // Multiple values - check if one is positive and one is negative
+    const baseArray = Array.from(baseValues).sort((a, b) => b - a); // Sort descending
+    const positive = baseArray.find(v => v > 0);
+    const negative = baseArray.find(v => v < 0);
+
+    if (positive !== undefined && negative !== undefined) {
+      // Format as "+0.75-"
+      result.handicap = `+${Math.abs(positive)}-`;
+    } else {
+      // Multiple values but not positive/negative pair - join them
+      result.handicap = baseArray.map(v => v >= 0 ? `+${v}` : v.toString()).join('/');
+    }
+  }
+
+  events.forEach((event: any) => {
+    const type1 = (event?.type_1 || '').trim();
+    const price = event?.price || 0;
+
+    if (type1 === 'Home') {
+      result.home = price.toString();
+    } else if (type1 === 'Away') {
+      result.away = price.toString();
+    }
+  });
+
+  return result.home !== '-' || result.away !== '-' ? result : undefined;
+};
+
+// Transform game data to Match format
+const transformGameToMatch = (game: any): Match => {
+  const winningOdds = extractWinningOdds(game.market);
+  const totalsOdds = extractTotalsOdds(game.market);
+  const handicapOdds = extractHandicapOdds(game.market);
+
+  return {
+    id: String(game.id),
+    homeTeam: game.team1_name || 'Team 1',
+    awayTeam: game.team2_name || 'Team 2',
+    time: game.time || '00:00',
+    isFavorite: false,
+    winningOdds: {
+      home: { value: winningOdds.home },
+      draw: { value: winningOdds.draw },
+      away: { value: winningOdds.away },
+    },
+    totalsOdds: totalsOdds ? {
+      total: totalsOdds.total,
+      over: { value: totalsOdds.over },
+      under: { value: totalsOdds.under },
+    } : undefined,
+    handicapOdds: handicapOdds ? {
+      handicap: handicapOdds.handicap,
+      home: { value: handicapOdds.home },
+      away: { value: handicapOdds.away },
+    } : undefined,
+    moreBetsCount: game.markets_count || 0,
+  };
+};
+
 export const CompetitionDetailContent: React.FC = () => {
-  const [matches, setMatches] = useState<DateGroup[]>(initialMatches);
+  const { competitionsData } = useWebSocket();
+  const [matches, setMatches] = useState<DateGroup[]>([]);
   const [isMultiColumn, setIsMultiColumn] = useState<boolean>(true);
-  const [activeCategory, setActiveCategory] = useState<string>('WINNING');
   const [viewMode, setViewMode] = useState<'list' | 'grid' | 'default'>('default');
+
+  // Get the competition object (handle both Record and single object)
+  const competition = useMemo(() => {
+    if (!competitionsData) return null;
+
+    // If it's a Record, get the first competition
+    if (competitionsData && typeof competitionsData === 'object' && 'data' in competitionsData) {
+      return competitionsData as any;
+    }
+
+    // If it's a Record<number, Competition>, get first value
+    const values = Object.values(competitionsData);
+    return values.length > 0 ? values[0] : null;
+  }, [competitionsData]);
+
+  // Transform competitionsData.data into DateGroup[] format
+  useEffect(() => {
+    if (!competition || !competition.data || typeof competition.data !== 'object') {
+      setMatches([]);
+      return;
+    }
+
+    const dateGroups: DateGroup[] = Object.entries(competition.data)
+      .map(([date, games]: [string, any]) => {
+        // Ensure games is an array
+        const gamesArray = Array.isArray(games) ? games : [];
+        const transformedMatches = gamesArray.map(transformGameToMatch);
+
+        return {
+          date,
+          isExpanded: true, // Default to expanded
+          matches: transformedMatches,
+        };
+      })
+      .sort((a, b) => {
+        // Sort dates chronologically (DD.MM.YYYY format)
+        const dateA = a.date.split('.').reverse().join('-');
+        const dateB = b.date.split('.').reverse().join('-');
+        return new Date(dateA).getTime() - new Date(dateB).getTime();
+      });
+
+    setMatches(dateGroups);
+  }, [competition]);
 
   const toggleDateGroup = (date: string) => {
     setMatches((prev) =>
@@ -403,6 +295,31 @@ export const CompetitionDetailContent: React.FC = () => {
     }
   };
 
+  // Determine which categories exist in the matches
+  const availableCategories = useMemo(() => {
+    const hasWinning = matches.some(group =>
+      group.matches.some(match => match.winningOdds)
+    );
+    const hasHandicap = matches.some(group =>
+      group.matches.some(match => match.handicapOdds)
+    );
+    const hasTotals = matches.some(group =>
+      group.matches.some(match => match.totalsOdds)
+    );
+
+    const filtered: CategoryGroup[] = [];
+    if (hasWinning) {
+      filtered.push(bettingCategories.find(cat => cat.header === 'WINNING')!);
+    }
+    if (hasHandicap) {
+      filtered.push(bettingCategories.find(cat => cat.header === 'HANDICAP')!);
+    }
+    if (hasTotals) {
+      filtered.push(bettingCategories.find(cat => cat.header === 'TOTALS')!);
+    }
+    return filtered.filter(Boolean);
+  }, [matches]);
+
   // Calculate width based on view mode and isMultiColumn
   const getWidth = () => {
     // If checkbox is unchecked, always 50%
@@ -414,7 +331,6 @@ export const CompetitionDetailContent: React.FC = () => {
     // viewMode === 'default'
     return '0 0 57%';
   };
-
   return (
     <div
       className="competition-detail-content"
@@ -423,7 +339,7 @@ export const CompetitionDetailContent: React.FC = () => {
       {/* Header Section */}
       <div className="competition-header">
         <CompetitionTitle
-          leagueName="UEFA Champions League"
+          leagueName={competition?.name || "UEFA Champions League"}
           isMultiColumn={isMultiColumn}
           onMultiColumnChange={setIsMultiColumn}
           onListViewClick={handleListViewClick}
@@ -433,9 +349,8 @@ export const CompetitionDetailContent: React.FC = () => {
 
         {/* Betting Categories */}
         <CompetitionFilter
-          categories={bettingCategories}
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
+          categories={availableCategories}
+          viewMode={viewMode}
         />
       </div>
 
@@ -444,6 +359,7 @@ export const CompetitionDetailContent: React.FC = () => {
         dateGroups={matches}
         onToggleDateGroup={toggleDateGroup}
         onToggleFavorite={toggleFavorite}
+        viewMode={viewMode}
       />
     </div>
   );

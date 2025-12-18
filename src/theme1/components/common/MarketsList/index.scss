@@ -1,0 +1,263 @@
+// MarketsList styles - extracted from GameDetailContent
+.markets-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.markets-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #353637;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  height: 36px;
+
+  .markets-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .markets-chevron {
+    color: #fff;
+    font-size: 12px;
+    transition: transform 0.2s;
+
+    &.expanded {
+      transform: rotateZ(180deg);
+    }
+  }
+}
+
+.markets-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.market-item-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2px;
+  background: #222325;
+  border-radius: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.market-item {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 12px;
+  background: #222325;
+  border-radius: 4px;
+  cursor: pointer;
+
+  i {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .market-name {
+    flex: 1;
+    font-size: 13px;
+    color: #fff;
+    text-align: left;
+  }
+
+  .market-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+
+    .bc-i-cashed-out {
+      color: #166820;
+    }
+  }
+
+  .action-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+
+    i {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .action-count {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .expand-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #fff;
+    }
+
+    i {
+      transition: transform 0.2s;
+    }
+
+    &.expanded {
+      i {
+        transform: rotateZ(180deg);
+      }
+    }
+  }
+}
+
+.market-expanded-content {
+  width: 100%;
+  padding: 5px 5px 10px;
+  background: #222325;
+  border-radius: 4px;
+
+  .market-table {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .market-table-header {
+    display: grid;
+    gap: 2px;
+    height: 28px;
+
+
+    .table-header-cell {
+      background: #333436;
+      border-radius: 4px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      padding: 4px 0;
+    }
+  }
+
+  .market-table-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .table-row {
+    display: grid;
+    width: 100%;
+    height: 34px;
+    gap: 2px;
+    margin-bottom: 5px;
+  }
+
+  .table-cell {
+    background: #4e4e50;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 4px;
+
+    &:hover {
+      background: #ed8b00;
+
+      .cell-base,
+      .cell-odds {
+        color: black;
+      }
+    }
+
+    &.selected {
+      background: #ed8b00;
+    }
+
+    .cell-content {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+    }
+
+    .cell-label {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .cell-base {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .cell-odds {
+      font-size: 14px;
+      color: #b18f26;
+      text-align: center;
+    }
+  }
+
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .market-option {
+    background: #2a2b2d;
+    border-radius: 4px;
+    padding: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    &:hover {
+      background: #353637;
+    }
+
+    &.selected {
+      background: #ed8b00;
+    }
+
+    .option-label {
+      font-size: 13px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .option-odds {
+      font-size: 15px;
+      font-weight: 600;
+      color: #ffd700;
+      text-align: center;
+    }
+  }
+}

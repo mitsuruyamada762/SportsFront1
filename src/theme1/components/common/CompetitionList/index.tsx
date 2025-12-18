@@ -49,12 +49,14 @@ interface CompetitionListProps {
   dateGroups: DateGroup[];
   onToggleDateGroup: (date: string) => void;
   onToggleFavorite: (matchId: string) => void;
+  viewMode?: 'list' | 'grid' | 'default';
 }
 
 export const CompetitionList: React.FC<CompetitionListProps> = ({
   dateGroups,
   onToggleDateGroup,
   onToggleFavorite,
+  viewMode = 'default',
 }) => {
   const isLoading = !dateGroups || dateGroups.length === 0;
 
@@ -86,7 +88,7 @@ export const CompetitionList: React.FC<CompetitionListProps> = ({
                 {dateGroup.isExpanded && (
                   <div className="matches-container">
                     {dateGroup.matches.map((match) => (
-                      <CompetitionMarketItem key={match.id} match={match} />
+                      <CompetitionMarketItem key={match.id} match={match} viewMode={viewMode} />
                     ))}
                   </div>
                 )}

@@ -1,55 +1,87 @@
-interface RawItem {
-    id: number;
-    group_id: number;
-    group_name: string;
-    group_order: number;
-    type: string;
-    [key: string]: any; // other fields
-}
+const mergeItems = (existing: any, newItem: any): any => {
+    const merged = { ...existing };
 
-interface GroupedItem {
-    group_id: number;
-    group_name: string;
-    group_order: number;
-    items: {
-        [type: string]: RawItem[];
-    };
-}
+    if (newItem.event) {
+        const existingEvents = existing.event
+            ? (Array.isArray(existing.event) ? existing.event : [existing.event])
+            : [];
+        merged.event = [...existingEvents, newItem.event];
+    }
 
-export const groupAndSort = (data: any) => {
-    const groups: Record<number, GroupedItem> = {};
-
-    for (const item of data) {
-        if (!item) continue;
-
-        const groupId = item.group_id;
-        if (groupId == null) continue;
-
-        if (!groups[groupId]) {
-            groups[groupId] = {
-                group_id: groupId,
-                group_name: item.group_name || '',
-                group_order: item.group_order || 0,
-                items: {}
-            };
-        }
-
-        if (!groups[groupId].items[item.type]) {
-            groups[groupId].items[item.type] = [];
-        }
-
-        if (item.event) {
-            groups[groupId].items[item.type].push(item.event);
+    for (const key in newItem) {
+        if (key !== 'event' && newItem[key] !== undefined) {
+            merged[key] = newItem[key];
         }
     }
 
-    return Object.values(groups).sort(
-        (a, b) => (a.group_order || 0) - (b.group_order || 0)
-    );
+    return merged;
+};
+
+export const groupAndSort = (data: any) => {
+    if (!Array.isArray(data)) return { All: {} };
+
+    const sortedData = [...data].sort((a: any, b: any) => (a?.order || 0) - (b?.order || 0));
+
+    const result: Record<string, Record<string, any>> = {
+        All: {}
+    };
+
+    const groupOrders: Record<string, number> = {
+        All: 0
+    };
+
+    for (const item of sortedData) {
+        if (!item || !item.name) continue;
+
+        const itemName = item.name;
+        const groupName = item.group_name || '';
+
+        if (groupName && item.group_order !== undefined) {
+            if (!groupOrders[groupName] || groupOrders[groupName] > item.group_order) {
+                groupOrders[groupName] = item.group_order;
+            }
+        }
+
+        if (!result.All[itemName]) {
+            const processedItem = { ...item };
+            if (processedItem.event) {
+                processedItem.event = [processedItem.event];
+            }
+            result.All[itemName] = processedItem;
+        } else {
+            result.All[itemName] = mergeItems(result.All[itemName], item);
+        }
+
+        if (groupName) {
+            if (!result[groupName]) {
+                result[groupName] = {};
+            }
+
+            if (!result[groupName][itemName]) {
+                const processedItem = { ...item };
+                if (processedItem.event) {
+                    processedItem.event = [processedItem.event];
+                }
+                result[groupName][itemName] = processedItem;
+            } else {
+                result[groupName][itemName] = mergeItems(result[groupName][itemName], item);
+            }
+        }
+    }
+
+    const sortedKeys = Object.keys(result).sort((a, b) => {
+        if (a === 'All') return -1;
+        if (b === 'All') return 1;
+        return (groupOrders[a] || 0) - (groupOrders[b] || 0);
+    });
+
+    const sortedResult: Record<string, Record<string, any>> = {};
+    for (const key of sortedKeys) {
+        sortedResult[key] = result[key];
+    }
+
+    return sortedResult;
 }
-
-
-
 
 export const mergeCompetitionsIntoA = (A: any, B: any) => {
     if (B) {
@@ -71,11 +103,9 @@ export const mergeGamesIntoA = (A: any, B: any) => {
         const BComp = B[compId];
         if (!BComp) continue;
 
-        // If A already has this competition → deep merge
         if (A[compId]) {
             deepMerge(A[compId], BComp);
 
-            // Otherwise create it
         } else {
             A[compId] = BComp;
         }
@@ -83,8 +113,6 @@ export const mergeGamesIntoA = (A: any, B: any) => {
 
     return A;
 }
-
-
 
 export const deepMerge = (target: any, source: any) => {
     for (const key in source) {

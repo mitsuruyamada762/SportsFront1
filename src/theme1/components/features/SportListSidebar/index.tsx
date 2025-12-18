@@ -5,14 +5,21 @@ import { SportListFilters } from '@/theme1/components/common/SportListFilters';
 import { SportListTree } from '@/theme1/components/common/SportListTree';
 import './index.scss';
 
-export const SportListSidebar: React.FC = () => {
-  const { sportsData, liveGamesList } = useWebSocket();
+interface SportListSidebarProps {
+  activeTab: 'live' | 'prematch';
+  onTabChange: (tab: 'live' | 'prematch') => void;
+}
+
+export const SportListSidebar: React.FC<SportListSidebarProps> = ({
+  activeTab,
+  onTabChange,
+}) => {
+  const { sportsData } = useWebSocket();
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<'live' | 'prematch'>('prematch');
   const [selectedSport, setSelectedSport] = useState<Sport | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<{ sportId: number; regionId: number } | null>(null);
   const [selectedTimeFilter, setSelectedTimeFilter] = useState<string | number>('all');
-
+  const liveGamesList = {}
   // Calculate counts
   const liveCount = useMemo<number>(() => {
     return (Object.values(liveGamesList || {}) as Sport[]).reduce(
@@ -40,7 +47,7 @@ export const SportListSidebar: React.FC = () => {
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         activeTab={activeTab}
-        onTabChange={setActiveTab}
+        onTabChange={onTabChange}
         liveCount={liveCount}
         prematchCount={prematchCount}
         selectedTimeFilter={selectedTimeFilter}

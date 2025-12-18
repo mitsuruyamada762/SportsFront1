@@ -7,7 +7,8 @@ import {
     getLiveSportsData,
     groupAndSort,
     mergeCompetitionsIntoA,
-    mergeGamesIntoA
+    mergeGamesIntoA,
+    addGamesDataByDate
 } from "@/theme1/utils";
 
 import { Sport, Competition, Game, WSMessage } from "@/theme1/types";
@@ -57,6 +58,7 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
     const [tmpGameData, setTmpGameData] = useState<Record<number, Game>>({});
     const [competitionsData, setCompetitionsData] = useState<Record<number, Competition>>({});
     const [tmpCompetitionData, setTmpCompetitionData] = useState<Record<number, Competition>>({});
+    const loggedCompetitions = useRef<Set<number>>(new Set());
 
     const connectWS = () => {
         if (socket.current?.readyState === WebSocket.OPEN) return;
@@ -117,19 +119,20 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
                                 .sort((a: any, b: any) => a.order - b.order),
                         })),
                 }));
-            sendMessage({ id: sortedSports[0]?.region[0]?.competition[0]?.id, alias: sortedSports[0].alias, type: "CompetitionData" })
             setSportsData(sortedSports);
+            sendMessage({ id: sortedSports[0]?.region[0]?.competition[0]?.id, type: "CompetitionData" })
         } else if (data.competition) {
             const competitions: Competition[] = Object.values(data.competition);
-
-            setCompetitionsData(() => {
-                const updated: Record<number, typeof competitions[0]> = {};
-                competitions.forEach(c => {
-                    if (c.id) {
-                        updated[c.id] = { ...c };
-                    }
-                });
-                return updated;
+            competitions.forEach((competition: any) => {
+                if (competition && competition.id && competition.game && Object.keys(competition.game).length > 0) {
+                    const competitionWithData: any = addGamesDataByDate(competition);
+                    type Game = { id: number };
+                    const gameId = (
+                        Object.values(competitionWithData.data) as Game[][]
+                    )[0][0].id;
+                    setCompetitionsData(competitionWithData)
+                    sendMessage({ id: gameId, type: "GamesData" })
+                }
             });
         }
         else if (data.game) {
@@ -172,10 +175,10 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
                     socket.current.send(JSON.stringify(getLiveSportsData()));
                     break;
                 case 'CompetitionData':
-                    socket.current.send(JSON.stringify(getCompetitionsData(msgData.id, msgData.alias)));
+                    socket.current.send(JSON.stringify(getCompetitionsData(msgData.id)));
                     break;
                 case 'GamesData':
-                    socket.current.send(JSON.stringify(getGameData(msgData.id, msgData.alias)));
+                    socket.current.send(JSON.stringify(getGameData(msgData.id)));
                     break;
                 default:
                     return;
@@ -183,27 +186,28 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
 
         }
         return true;
+
     };
     const game = Object.values(gamesData).find((game: any) => game.id);
     const marketObj = game?.market ?? {};
     const sortedMarketsData = groupAndSort(Object.values(marketObj));
+    console.log(sportsData, competitionsData, gamesData)
+    // useEffect(() => {
+    //     if (tmpCompetitionData && competitionsData) {
+    //         mergeCompetitionsIntoA(competitionsData, tmpCompetitionData[0])
+    //     }
 
-    useEffect(() => {
-        if (tmpCompetitionData && competitionsData) {
-            mergeCompetitionsIntoA(competitionsData, tmpCompetitionData[0])
-        }
+    // }, [tmpCompetitionData])
 
-    }, [tmpCompetitionData])
-
-    useEffect(() => {
-        const filteredCompetitionsData = Object.fromEntries(
-            Object.entries(competitionsData).filter(([, value]) => value?.id)
-        );
-        const isDifferent = Object.keys(filteredCompetitionsData).length !== Object.keys(competitionsData).length;
-        if (isDifferent) {
-            setCompetitionsData(filteredCompetitionsData);
-        }
-    }, [competitionsData]);
+    // useEffect(() => {
+    //     const filteredCompetitionsData = Object.fromEntries(
+    //         Object.entries(competitionsData).filter(([, value]) => value?.id)
+    //     );
+    //     const isDifferent = Object.keys(filteredCompetitionsData).length !== Object.keys(competitionsData).length;
+    //     if (isDifferent) {
+    //         setCompetitionsData(filteredCompetitionsData);
+    //     }
+    // }, [competitionsData]);
 
     useEffect(() => {
         if (tmpGameData && gamesData) {
@@ -227,7 +231,6 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
         };
     }, []);
 
-    console.log("asdfas", sportsData)
     return (
         <WebSocketContext.Provider value={{ socket: socket.current, isConnected, sportsData, competitionsData, gamesData, sortedMarketsData, sendMessage }}>
             {children}

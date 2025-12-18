@@ -2,6 +2,7 @@ import React from 'react';
 import { Dropdown } from '@/theme1/components/ui/Dropdown';
 import './index.scss';
 import { timeFilterItems } from '@/theme1/utils';
+import { useWebSocket } from '@/theme1/contexts';
 
 interface SportListFiltersProps {
   searchQuery: string;
@@ -24,7 +25,7 @@ export const SportListFilters: React.FC<SportListFiltersProps> = ({
   selectedTimeFilter,
   onTimeFilterChange,
 }) => {
-
+  const { sendMessage } = useWebSocket()
   return (
     <div className="sport-list-filters">
       {/* Search Bar */}
@@ -46,7 +47,10 @@ export const SportListFilters: React.FC<SportListFiltersProps> = ({
       <div className="tabs-container">
         <button
           className={`tab ${activeTab === 'live' ? 'active' : ''} border-radius-left`}
-          onClick={() => onTabChange('live')}
+          onClick={() => {
+            onTabChange('live')
+            sendMessage({ type: "LiveGamesList" })
+          }}
         >
           LIVE ({liveCount})
         </button>

@@ -3,11 +3,17 @@ import { CompetitionDetailContent } from '../CompetitionDetailContent';
 import { GameDetailContent } from '../GameDetailContent';
 import './index.scss';
 
-export const SportMainContent: React.FC = () => {
+interface SportMainContentProps {
+  activeTab: 'live' | 'prematch';
+}
+
+export const SportMainContent: React.FC<SportMainContentProps> = ({ activeTab }) => {
+  const isLive = activeTab === 'live';
+
   return (
     <div className="sport-main-content">
-      <CompetitionDetailContent />
-      <GameDetailContent />
+      {!isLive && <CompetitionDetailContent />}
+      <GameDetailContent fullWidth={isLive} />
     </div>
   );
 };

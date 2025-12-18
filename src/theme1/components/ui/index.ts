@@ -6,4 +6,5 @@ export { RegionItem } from './RegionItem';
 export { CompetitionItem } from './CompetitionItem';
 export { DateCompetitionTitle } from './DateCompetitionTitle';
 export { CompetitionMarketItem } from './CompetitionMarketItem';
+export { LoadingSpinner } from './LoadingSpinner';
 
