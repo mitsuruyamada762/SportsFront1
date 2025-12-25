@@ -25,7 +25,22 @@ export const SportListFilters: React.FC<SportListFiltersProps> = ({
   selectedTimeFilter,
   onTimeFilterChange,
 }) => {
-  const { sendMessage } = useWebSocket()
+  const { resetTotalData, sendMessage } = useWebSocket()
+  const liveGames = (data: any) => {
+    switch (data) {
+      case 'live':
+        sendMessage({ type: "LiveGamesList" })
+        break;
+      case 'prematch':
+        sendMessage({ type: "SportData" })
+        break;
+      default:
+        break;
+    }
+    onTabChange(data)
+    resetTotalData()
+
+  }
   return (
     <div className="sport-list-filters">
       {/* Search Bar */}
@@ -48,15 +63,14 @@ export const SportListFilters: React.FC<SportListFiltersProps> = ({
         <button
           className={`tab ${activeTab === 'live' ? 'active' : ''} border-radius-left`}
           onClick={() => {
-            onTabChange('live')
-            sendMessage({ type: "LiveGamesList" })
+            liveGames('live')
           }}
         >
           LIVE ({liveCount})
         </button>
         <button
           className={`tab ${activeTab === 'prematch' ? 'active' : ''} border-radius-right`}
-          onClick={() => onTabChange('prematch')}
+          onClick={() => liveGames('prematch')}
         >
           PreMatch ({prematchCount})
         </button>

@@ -23,10 +23,8 @@ export const CompetitionFilter: React.FC<CompetitionFilterProps> = ({
   // Filter categories based on viewMode
   const filteredCategories = React.useMemo(() => {
     if (viewMode === 'list') {
-      // Show only WINNING category
       return categories.filter(cat => cat.header === 'WINNING');
     } else if (viewMode === 'default') {
-      // Show WINNING and TOTALS if both exist
       const winning = categories.find(cat => cat.header === 'WINNING');
       const totals = categories.find(cat => cat.header === 'TOTALS');
       const result: CategoryGroup[] = [];
@@ -34,7 +32,6 @@ export const CompetitionFilter: React.FC<CompetitionFilterProps> = ({
       if (totals) result.push(totals);
       return result;
     } else {
-      // viewMode === 'grid': show WINNING, HANDICAP, TOTALS in order, but only if they exist
       const winning = categories.find(cat => cat.header === 'WINNING');
       const handicap = categories.find(cat => cat.header === 'HANDICAP');
       const totals = categories.find(cat => cat.header === 'TOTALS');

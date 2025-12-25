@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { CarouselCard } from '@/types';
+import { CarouselCard } from '@/theme2/types';
 import MatchCard from '../ui/MatchCard';
 import PromoCard from '../ui/PromoCard';
 import './Carousel.scss';

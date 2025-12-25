@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { FLAGS } from '@/theme1/utils/const';
 import './index.scss';
 
 export interface TeamInfo {
@@ -14,7 +15,48 @@ export interface GameHeaderProps {
   leagueName: string;
   matchDate: string;
   teams: TeamInfo[];
+  regionAlias?: string;
 }
+
+// Convert alias to FLAGS object key format (PascalCase)
+const getFlagKey = (alias?: string): string => {
+  if (!alias) return '';
+
+  // Convert alias to PascalCase (e.g., "united_states" -> "UnitedStates", "united-states" -> "UnitedStates")
+  return alias
+    .split(/[_\s-]+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join('');
+};
+
+// Get flag image from FLAGS object based on alias
+const getFlagImage = (alias?: string): string | null => {
+  // Return null if no alias (don't show default during loading)
+  if (!alias) return null;
+
+  const normalizedAlias = alias.toLowerCase().trim();
+
+  // Try direct match with PascalCase conversion first
+  const flagKey = getFlagKey(alias);
+  if (flagKey && FLAGS[flagKey as keyof typeof FLAGS]) {
+    return FLAGS[flagKey as keyof typeof FLAGS] as string;
+  }
+
+  // Try case-insensitive search in FLAGS keys
+  const flagsKeys = Object.keys(FLAGS);
+  const matchedKey = flagsKeys.find(key =>
+    key.toLowerCase() === normalizedAlias ||
+    key.toLowerCase() === flagKey.toLowerCase() ||
+    key.toLowerCase().replace(/[_\s-]/g, '') === normalizedAlias.replace(/[_\s-]/g, '')
+  );
+
+  if (matchedKey) {
+    return FLAGS[matchedKey as keyof typeof FLAGS] as string;
+  }
+
+  // Return default flag if no match found
+  return FLAGS.Default as string;
+};
 
 export const GameHeader: React.FC<GameHeaderProps> = ({
   backgroundImage,
@@ -22,7 +64,10 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
   leagueName,
   matchDate,
   teams,
+  regionAlias,
 }) => {
+  const flagImage = useMemo(() => getFlagImage(regionAlias), [regionAlias]);
+
   return (
     <div className="game-header">
       <div className="header-background">
@@ -39,6 +84,15 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
             {leagueIcon && (
               <div className="league-icon-wrapper">
                 <i className={leagueIcon}></i>
+              </div>
+            )}
+            {flagImage && (
+              <div className="league-region">
+                <img
+                  src={flagImage}
+                  alt={regionAlias || 'Region flag'}
+                  className="league-region-icon"
+                />
               </div>
             )}
             <span className="league-name">{leagueName}</span>

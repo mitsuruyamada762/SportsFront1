@@ -5,6 +5,7 @@ import type { TeamInfo, CategoryTab } from '@/theme1/components/common';
 import type { MarketItem, BettingOption, MarketRow } from '@/theme1/components/common';
 import gameImg from '../../../assets/images/soccer.png';
 import { useWebSocket } from '@/theme1/contexts';
+import { Loader } from '../../ui';
 
 
 const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[] => {
@@ -14,7 +15,6 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
 
   const marketItems: MarketItem[] = [];
   let marketIdCounter = 1;
-
 
   Object.entries(categoryMarkets).forEach(([marketName, marketData]: [string, any]) => {
     if (!marketData || !marketData.event || !Array.isArray(marketData.event)) {
@@ -26,14 +26,12 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
     const displayName = marketData.name || marketData.name_template || marketName;
 
     if (marketData.event.length === 1) {
-      // Case 1: event.length === 1
+
       const eventObj = marketData.event[0];
       if (!eventObj || typeof eventObj !== 'object') return;
 
       const eventEntries = Object.entries(eventObj);
       if (eventEntries.length === 0) return;
-
-      // Sort elements by order
       const sortedEntries = eventEntries
         .map(([key, data]: [string, any]) => ({
           key,
@@ -49,8 +47,6 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
       const columnNames: string[] = [];
 
       if (hasMoreThanThreeElements) {
-        // If elements.length > 3: name and price in same cell with justify-content: space-between
-        // Create rows with colCount cells per row
         for (let i = 0; i < sortedEntries.length; i += colCount) {
           const rowEntries = sortedEntries.slice(i, i + colCount);
           const cells: BettingOption[] = [];
@@ -63,14 +59,13 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
 
             cells.push({
               id: `${marketIdCounter}-${key}`,
-              label: eventName, // Name goes in label
+              label: eventName,
               odds: eventPrice.toString(),
               base: baseValue,
               isSelected: false,
             });
           });
 
-          // Fill remaining cells if needed
           while (cells.length < colCount) {
             cells.push({
               id: `${marketIdCounter}-empty-${Math.floor(i / colCount)}-${cells.length}`,
@@ -86,18 +81,12 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
           });
         }
       } else {
-        // If elements.length <= 3:
-        // - Show element names in the market table header
-        // - Render all data in a single row
-
-        // Header columns: element names
         sortedEntries.forEach(({ key, data }) => {
           if (!data) return;
           const eventName = data.name || data.type_1 || key;
           columnNames.push(eventName);
         });
 
-        // Single row with one cell per element (only odds / base+odds)
         const cells: BettingOption[] = [];
         sortedEntries.forEach(({ key, data }) => {
           if (!data) return;
@@ -106,7 +95,7 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
 
           cells.push({
             id: `${marketIdCounter}-${key}`,
-            label: '', // No label inside cell; names are in header
+            label: '',
             odds: eventPrice.toString(),
             base: baseValue,
             isSelected: false,
@@ -127,8 +116,8 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
           name: displayName,
           linkCount: linkCount,
           hasCashOut: hasCashOut,
-          // For <=3 elements we want everything in a single row,
-          // so the effective column count is the number of elements.
+
+
           colCount: hasMoreThanThreeElements ? colCount : elementCount,
           rows: rows,
           columns: hasMoreThanThreeElements ? [] : columnNames.slice(0, elementCount),
@@ -136,7 +125,7 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
         marketIdCounter++;
       }
     } else {
-      // Case 2: event.length > 1
+
       const rows: MarketRow[] = [];
       let columnNames: string[] = [];
 
@@ -146,7 +135,7 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
         const eventEntries = Object.entries(eventObj);
         if (eventEntries.length === 0) return;
 
-        // Sort elements by order
+
         const sortedEntries = eventEntries
           .map(([key, data]: [string, any]) => ({
             key,
@@ -155,19 +144,19 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
           }))
           .sort((a, b) => a.order - b.order);
 
-        // Get the name from first element for row label
+
         const firstElementData = sortedEntries[0]?.data;
         const rowLabelName = firstElementData?.name || firstElementData?.type_1 || '';
-        
-        // Use name as row label (show name in row-label once)
+
+
         const rowLabel = rowLabelName || undefined;
 
-        // Set column names from first event
+
         if (eventIndex === 0) {
           columnNames = sortedEntries.map(({ data }) => data?.name || data?.type_1 || '').slice(0, colCount);
         }
 
-        // Create cells with prices
+
         const cells: BettingOption[] = [];
         sortedEntries.forEach(({ key, data }) => {
           if (!data) return;
@@ -176,14 +165,14 @@ const convertToMarketItems = (categoryMarkets: Record<string, any>): MarketItem[
 
           cells.push({
             id: `${marketIdCounter}-${eventIndex}-${key}`,
-            label: '', // No label in cell
+            label: '',
             odds: eventPrice.toString(),
             base: baseValue,
             isSelected: false,
           });
         });
 
-        // Fill remaining cells if needed
+
         while (cells.length < colCount) {
           cells.push({
             id: `${marketIdCounter}-empty-${eventIndex}-${cells.length}`,
@@ -224,8 +213,64 @@ interface GameDetailContentProps {
 
 export const GameDetailContent: React.FC<GameDetailContentProps> = ({ fullWidth = false }) => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
-  const { sortedMarketsData } = useWebSocket();
+  const { sortedMarketsData, gamesData, competitionsData } = useWebSocket();
 
+  // Get selected competition
+  const competition = useMemo(() => {
+    if (!competitionsData) return null;
+
+    if (competitionsData && typeof competitionsData === 'object' && 'data' in competitionsData) {
+      return competitionsData as any;
+    }
+
+    const values = Object.values(competitionsData);
+    return values.length > 0 ? values[0] : null;
+  }, [competitionsData]);
+
+  // Get selected game
+  const game = useMemo(() => {
+    if (!gamesData || Object.keys(gamesData).length === 0) return null;
+    return Object.values(gamesData).find((game: any) => game.id) || null;
+  }, [gamesData]);
+
+  // Format date from timestamp
+  const formatMatchDate = (timestamp?: number): string => {
+    if (!timestamp) return '';
+    const date = new Date(timestamp * 1000);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${day}.${month}.${year}, ${hours}:${minutes}`;
+  };
+
+  // Get league icon from sport alias
+  const leagueIcon = useMemo(() => {
+    if (!game?.sport_alias) return 'bc-i-Soccer';
+    return `bc-i-${game.sport_alias}`;
+  }, [game?.sport_alias]);
+
+  // Get teams from game data
+  const teams: TeamInfo[] = useMemo(() => {
+    if (!game) return [];
+    
+    const team1: TeamInfo = {
+      name: game.team1_name || '',
+      status: '',
+      points: '',
+      indicators: [],
+    };
+    
+    const team2: TeamInfo = {
+      name: game.team2_name || '',
+      status: '',
+      points: '',
+      indicators: [],
+    };
+
+    return [team1, team2].filter(team => team.name);
+  }, [game]);
 
   const categoryTabs: CategoryTab[] = useMemo(() => {
     if (!sortedMarketsData || typeof sortedMarketsData !== 'object') {
@@ -271,44 +316,37 @@ export const GameDetailContent: React.FC<GameDetailContentProps> = ({ fullWidth 
     return convertToMarketItems(categoryMarkets);
   }, [activeCategory, sortedMarketsData]);
 
-  const teams: TeamInfo[] = [
-    {
-      name: 'FC Kairat Almaty',
-      status: '36',
-      points: '1',
-      indicators: ['M', 'M', 'M', 'B', 'M'],
-    },
-    {
-      name: 'Club Brugge',
-      status: '30',
-      points: '4',
-      indicators: ['M', 'M', 'B', 'M', 'M'],
-    },
-  ];
-
   return (
     <div
       className="game-detail-content"
       style={fullWidth ? { flex: '0 0 100%' } : undefined}
     >
-      <div className="game-detail-header">
+      {!gamesData || Object.keys(gamesData).length === 0 ? (
+        <div style={{ height: "100%", display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem' }}>
+          <Loader />
+        </div>
+      ) : (<>
+        <div className="game-detail-header">
 
-        <GameHeader
-          backgroundImage={gameImg}
-          leagueIcon="bc-i-Soccer"
-          leagueName="UEFA Champions League"
-          matchDate="21.01.2026, 00:30"
-          teams={teams}
+          <GameHeader
+            backgroundImage={gameImg}
+            leagueIcon={leagueIcon}
+            leagueName={competition?.name || ''}
+            matchDate={formatMatchDate(game?.start_ts)}
+            teams={teams}
+            regionAlias={game?.region_alias}
+          />
+
+        </div>
+        <CategoryTabs
+          tabs={categoryTabs}
+          activeTab={activeCategory}
+          onTabChange={setActiveCategory}
         />
 
-      </div>
-      <CategoryTabs
-        tabs={categoryTabs}
-        activeTab={activeCategory}
-        onTabChange={setActiveCategory}
-      />
-
-      <MarketsList markets={filteredMarketItems} />
+        <MarketsList markets={filteredMarketItems} />
+      </>
+      )}
 
     </div>
   );

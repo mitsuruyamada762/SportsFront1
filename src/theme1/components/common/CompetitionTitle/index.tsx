@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { FLAGS } from '@/theme1/utils/const';
 import './index.scss';
 
 interface CompetitionTitleProps {
-  leagueName: string;
+  leagueName?: string;
+  leagueAlias?: string;
   isMultiColumn: boolean;
   onMultiColumnChange: (value: boolean) => void;
   onListViewClick?: () => void;
@@ -10,14 +12,60 @@ interface CompetitionTitleProps {
   viewMode?: 'list' | 'grid' | 'default';
 }
 
+// Convert alias to FLAGS object key format (PascalCase)
+const getFlagKey = (alias?: string): string => {
+  if (!alias) return '';
+  
+  // Convert alias to PascalCase (e.g., "united_states" -> "UnitedStates", "united-states" -> "UnitedStates")
+  return alias
+    .split(/[_\s-]+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join('');
+};
+
+// Get flag image from FLAGS object based on alias
+const getFlagImage = (alias?: string): string | undefined => {
+  // If no alias yet (e.g., still loading), do not show anything
+  if (!alias) return undefined;
+  // Default flag to use when no match is found
+  const defaultFlag = FLAGS.Default as string;
+  
+  const normalizedAlias = alias.toLowerCase().trim();
+  
+  // Try direct match with PascalCase conversion first
+  const flagKey = getFlagKey(alias);
+  if (flagKey && FLAGS[flagKey as keyof typeof FLAGS]) {
+    return FLAGS[flagKey as keyof typeof FLAGS] as string;
+  }
+  
+  // Try case-insensitive search in FLAGS keys
+  const flagsKeys = Object.keys(FLAGS);
+  const matchedKey = flagsKeys.find(key => 
+    key.toLowerCase() === normalizedAlias || 
+    key.toLowerCase() === flagKey.toLowerCase() ||
+    key.toLowerCase().replace(/[_\s-]/g, '') === normalizedAlias.replace(/[_\s-]/g, '')
+  );
+  
+  if (matchedKey) {
+    return FLAGS[matchedKey as keyof typeof FLAGS] as string;
+  }
+  
+  // Return default flag if no match found
+  return defaultFlag;
+};
+
 export const CompetitionTitle: React.FC<CompetitionTitleProps> = ({
   leagueName,
+  leagueAlias,
   isMultiColumn,
   onMultiColumnChange,
   onListViewClick,
   onGridViewClick,
   viewMode = 'default',
 }) => {
+  const flagImage = useMemo(() => getFlagImage(leagueAlias), [leagueAlias]);
+  const showBadge = Boolean(flagImage);
+
   return (
     <div className="competition-title">
       <div className="header-top">
@@ -27,14 +75,15 @@ export const CompetitionTitle: React.FC<CompetitionTitleProps> = ({
               <i className="comp-fav-icon-bc bc-i-favorite"></i>
             </div>
           )}
-          <div className="league-badge">
-            <svg className="star-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path
-                d="M6 0.5L7.5 4.5L11.5 4.5L8.5 7L10 11L6 8.5L2 11L3.5 7L0.5 4.5L4.5 4.5L6 0.5Z"
-                fill="#FFD700"
+          {showBadge && (
+            <div className="league-badge">
+              <img 
+                src={flagImage} 
+                alt={leagueName || 'League flag'} 
+                className="league-badge-icon"
               />
-            </svg>
-          </div>
+            </div>
+          )}
           <span className="league-name">{leagueName}</span>
         </div>
 

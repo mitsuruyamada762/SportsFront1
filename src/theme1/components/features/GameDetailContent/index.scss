@@ -9,3 +9,7 @@
   overflow-y: scroll;
   padding-right: 3px;
 }
+
+.competition-detail-content.full-width ~ .game-detail-content {
+  display: none;
+}

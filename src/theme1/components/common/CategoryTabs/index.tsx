@@ -17,7 +17,6 @@ export const CategoryTabs: React.FC<CategoryTabsProps> = ({
   activeTab,
   onTabChange,
 }) => {
-  const [isTabsScrolled, setIsTabsScrolled] = useState<boolean>(false);
   const [hasOverflow, setHasOverflow] = useState<boolean>(false);
   const [canScrollLeft, setCanScrollLeft] = useState<boolean>(false);
   const [canScrollRight, setCanScrollRight] = useState<boolean>(false);
@@ -38,7 +37,6 @@ export const CategoryTabs: React.FC<CategoryTabsProps> = ({
 
       setCanScrollLeft(canScrollLeftValue);
       setCanScrollRight(canScrollRightValue);
-      setIsTabsScrolled(canScrollLeftValue);
     }
   };
 
