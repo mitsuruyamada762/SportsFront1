@@ -25,12 +25,19 @@
 
     .league-badge {
       position: relative;
-      background: #3b82f6;
       border-radius: 4px;
       padding: 4px 8px;
       display: flex;
       align-items: center;
       gap: 4px;
+
+      .league-badge-icon {
+        width: 22px;
+        height: 14px;
+        object-fit: contain;
+        display: block;
+        border-radius: 2px;
+      }
 
       .star-icon {
         width: 12px;
@@ -114,12 +121,12 @@
       align-items: center;
       justify-content: center;
       color: rgba(255, 255, 255, 0.7);
-      
+
       .view-icon-btn:first-child {
         transform: rotateY(180deg);
         color: rgba(255, 255, 255, 0.7);
       }
-      
+
       .view-icon-btn {
         display: flex;
         align-items: center;
@@ -134,7 +141,7 @@
         color: rgba(255, 255, 255, 0.7);
       }
     }
-    
+
     .view-icon-btn {
       color: rgba(255, 255, 255, 0.7);
       display: flex;
@@ -147,7 +154,7 @@
       width: 27px;
       height: 27px;
       flex-shrink: 0;
-      
+
       &.grid-reset-btn {
         color: rgba(255, 255, 255, 0.7);
         transform: rotateY(180deg);

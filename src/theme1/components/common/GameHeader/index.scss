@@ -45,6 +45,19 @@
   padding: 10px;
 }
 
+.league-region {
+  width: 22px;
+  height: 14px;
+
+  .league-region-icon {
+    width: 22px;
+    height: 14px;
+    object-fit: contain;
+    display: block;
+    border-radius: 2px;
+  }
+}
+
 .league-info {
   display: flex;
   align-items: center;

@@ -1,0 +1,83 @@
+.bc-loader-contain {
+  width: 68px;
+  height: 68px;
+}
+
+.bc-loader-contain {
+  position: relative;
+  margin: auto;
+}
+
+/* BC Loader Animation */
+.bc-loader-contain>svg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.bc-loader-animation {
+  animation: rotate 2s linear infinite;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.path {
+  stroke-dasharray: 20, 200;
+  stroke-dashoffset: 0;
+  animation: dash 2s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+  fill: #fff;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 0, 200;
+    stroke-dashoffset: -40px;
+  }
+
+  50% {
+    stroke-dasharray: 80, 200;
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dasharray: 0, 200;
+    stroke-dashoffset: -40px;
+  }
+}
+
+@keyframes color {
+
+  to,
+  0% {
+    stroke: #b6862e;
+  }
+
+  40% {
+    stroke: #a71f67;
+  }
+
+  66% {
+    stroke: #b6862e;
+  }
+
+  80%,
+  90% {
+    stroke: #a71f67;
+  }
+}

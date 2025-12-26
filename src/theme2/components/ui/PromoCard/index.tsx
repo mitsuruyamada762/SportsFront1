@@ -1,5 +1,5 @@
 import React from "react";
-import { CarouselCard } from "@/types";
+import { CarouselCard } from "@/theme2/types";
 import CrownImg from "../../../assets/images/crown.svg";
 import "./index.scss";
 
@@ -26,7 +26,7 @@ const PromoCard: React.FC<{ card: CarouselCard }> = ({ card }) => {
               <button
                 type="button"
                 className="learn-btn mt-2 max-w-[160px] flex rounded w-[160px] items-center justify-center"
-                
+
               >
                 {card.buttonText}
               </button>

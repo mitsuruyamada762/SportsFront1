@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.scss';
 
 export interface BettingOption {
@@ -35,9 +35,19 @@ export interface MarketsListProps {
 export const MarketsList: React.FC<MarketsListProps> = ({
   markets,
 }) => {
-  const [expandedMarkets, setExpandedMarkets] = useState<Set<string>>(new Set());
+  const allMarketIds = markets.map(market => market.id);
 
-  const [headerExpandedState, setHeaderExpandedState] = useState<boolean>(false);
+  const [expandedMarkets, setExpandedMarkets] = useState<Set<string>>(
+    () => new Set(allMarketIds)
+  );
+
+  const [headerExpandedState, setHeaderExpandedState] = useState<boolean>(true);
+
+  useEffect(() => {
+    const allIds = markets.map(market => market.id);
+    setExpandedMarkets(new Set(allIds));
+    setHeaderExpandedState(true);
+  }, [markets]);
 
   const handleToggleMarketExpand = (marketId: string) => {
     const newExpanded = new Set(expandedMarkets);
@@ -50,15 +60,11 @@ export const MarketsList: React.FC<MarketsListProps> = ({
 
   };
 
-  const allMarketIds = markets.map(market => market.id);
-
   const handleToggleAllMarkets = () => {
     if (headerExpandedState) {
-
       setExpandedMarkets(new Set());
       setHeaderExpandedState(false);
     } else {
-
       setExpandedMarkets(new Set(allMarketIds));
       setHeaderExpandedState(true);
     }

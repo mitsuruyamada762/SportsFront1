@@ -1,5 +1,9 @@
 # Game - Professional React Project
 
+
+
+
+
 A modern, professional React application built with TypeScript, Tailwind CSS, and Headless UI. This project demonstrates best practices for React development with a clean, scalable architecture.
 
 ## 🚀 Features
