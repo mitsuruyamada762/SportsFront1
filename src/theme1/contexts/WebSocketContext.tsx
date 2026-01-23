@@ -131,7 +131,10 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
 
     const connectWS = () => {
         if (socket.current?.readyState === WebSocket.OPEN) return;
-        socket.current = new WebSocket("wss://eu-swarm-ws-re.betcoswarm.com/");
+        // Connect to backend WebSocket proxy instead of original server
+        const wsUrl = import.meta.env.VITE_WEBSOCKET_URL || "wss://localhost:7275/ws/eu-swarm-newm.celtabet1008.com";
+        console.log(wsUrl, "WS URL")
+        socket.current = new WebSocket(wsUrl);
         socket.current.onopen = () => {
             setIsConnected(true);
             reconnectAttempts.current = 0;
@@ -162,8 +165,11 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
         if (!socket.current || socket.current.readyState !== WebSocket.OPEN) return;
         commands.forEach((cmd) => {
             socket.current?.send(JSON.stringify(cmd));
+           // socket.current?.send(cmd);
+            console.log(cmd, "CMD")
         });
         socket.current.send(JSON.stringify(getSportsData()));
+        console.log(getSportsData(), "SPORTS DATA")
     };
     const extractNestedData = (msg: WSMessage): any => {
         let d = msg.data;

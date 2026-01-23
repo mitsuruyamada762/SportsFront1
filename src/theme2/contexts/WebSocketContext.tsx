@@ -60,7 +60,9 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
 
     const connectWS = () => {
         if (socket.current?.readyState === WebSocket.OPEN) return;
-        socket.current = new WebSocket("wss://eu-swarm-ws-re.betcoswarm.com/");
+        // Connect to backend WebSocket proxy instead of original server
+        const wsUrl = import.meta.env.VITE_WEBSOCKET_URL || "wss://localhost:7275/ws/sports";
+        socket.current = new WebSocket(wsUrl);
         socket.current.onopen = () => {
             setIsConnected(true);
             reconnectAttempts.current = 0;
